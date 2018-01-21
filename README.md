@@ -9,3 +9,6 @@
 
 # jhipster简单来说是一个基于nodejs+yeoman的java代码生成器。往大了说是基于java的一套微服务解决方案
 <a href="https://github.com/jhipster/generator-jhipster">基于nodejs+yeoman的java代码生成器</a>
+
+# 支付系统
+https://github.com/paymentrpc
