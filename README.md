@@ -13,5 +13,5 @@
 
 * 其他<br/>
 <a href="https://github.com/jhipster/generator-jhipster">基于nodejs+yeoman的java代码生成器</a>
-<a href="2017 年度码云新增项目排行榜 TOP 50"></a>
+<a href="http://mp.weixin.qq.com/s/H6Nb-MpJzPy8S_NLWo8V-w">2017 年度码云新增项目排行榜TOP50</a>
 
