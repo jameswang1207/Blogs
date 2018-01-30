@@ -11,6 +11,9 @@
 * 支付系统<br/>
 <a href="https://github.com/paymentrpc">支付系统老熊</a>
 
+* 规则引擎<br/>
+<a href="http://blog.csdn.net/qq_31179577/article/details/76585854">Drools 规则引擎</a>
+
 * 其他<br/>
 <a href="https://github.com/jhipster/generator-jhipster">基于nodejs+yeoman的java代码生成器</a><br/>
 <a href="http://mp.weixin.qq.com/s/H6Nb-MpJzPy8S_NLWo8V-w">2017 年度码云新增项目排行榜TOP50</a><br/>
