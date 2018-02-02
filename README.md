@@ -14,7 +14,11 @@
 * 规则引擎<br/>
 <a href="http://blog.csdn.net/qq_31179577/article/details/76585854">Drools 规则引擎</a>
 
+* elasticsearch<br/>
+<a href="https://mp.weixin.qq.com/s/Xvc7f0nBaNVa7_DnzjCUiw">eBay的Elasticsearch性能调优实践</a>
+
 * 其他<br/>
 <a href="https://github.com/jhipster/generator-jhipster">基于nodejs+yeoman的java代码生成器</a><br/>
 <a href="http://mp.weixin.qq.com/s/H6Nb-MpJzPy8S_NLWo8V-w">2017 年度码云新增项目排行榜TOP50</a><br/>
+<a href="http://mp.weixin.qq.com/s/zFJokAv8lSQejGFTGJTJeQ">微服务架构技术栈选型手册（万字长文</a>
 
