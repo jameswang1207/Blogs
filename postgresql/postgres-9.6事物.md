@@ -70,7 +70,7 @@ COMMIT TRANSACTION;
 > <br/>
 > <br/>
 > <br/>
-> 使用 read committed 级别
+> 使用 read committed 级别<br/>
 > ![](./images/committed-read.png)<br/>
 
 pg和mysql没有串行执行(在update，delete做串行)
