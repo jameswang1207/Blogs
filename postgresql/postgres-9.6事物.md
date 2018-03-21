@@ -63,9 +63,15 @@ COMMIT TRANSACTION;
 > <br/>
 > <br/>
 > <br/>
+> 使用 repeatable read 级别
 > ![](./images/2.png)<br/>
-> 两个事物都修改数据，生效数据是后面提交的，不论谁的事物先开启。
-
+> 两个事物都修改数据，生效数据先提交的数据，不论谁的事物先开启。(只有一个事物提交成功,先提交的事物生效，另一个事物异常)
+> <br/>
+> <br/>
+> <br/>
+> <br/>
+> 使用 read committed 级别
+> ![](./images/committed-read.png)<br/>
 
 pg和mysql没有串行执行(在update，delete做串行)
 sqlserver 使用的是串行（进行串行，select也做了串行）
