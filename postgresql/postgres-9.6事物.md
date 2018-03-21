@@ -54,12 +54,18 @@ COMMIT TRANSACTION;
 
 * 当repeatableread的事务去更新或删除在事务过程中被其他事务已经变更过的数据时,将报错等待回滚
 > ![](./images/1.png)<br/>
->1. T1 : 开启repeatable read 隔离级别,并查询结果<br/>
+> 1. T1 : 开启repeatable read 隔离级别,并查询结果<br/>
 > 2. T2 : 开启repeatable read 隔离级别,修改记录<br/>
 > 3. T1 ：修改不相关记录,正常修改,修改T2中修改的记录,等待<br/>
 > 4. T2 : 提交事物<br/>
 > 5. T1 : 在T2提交事物的瞬间，T1报错<br/>
+> <br/>
+> <br/>
+> <br/>
+> <br/>
+> ![](./images/2.png)<br/>
+> 两个事物都修改数据，生效数据是后面提交的，不论谁的事物先开启。
 
 
-pg和mysql没有串行执行
-sqlserver 使用的是串行
+pg和mysql没有串行执行(在update，delete做串行)
+sqlserver 使用的是串行（进行串行，select也做了串行）
