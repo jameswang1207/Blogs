@@ -20,6 +20,7 @@
 <a href="https://mp.weixin.qq.com/s/Xvc7f0nBaNVa7_DnzjCUiw">eBay的Elasticsearch性能调优实践</a>
 
 * spring boot and spring cloud <br/>
+<a href="https://github.com/ityouknow/awesome-spring-boot">awesome-spring-boot</a><br/>
 <a href="https://github.com/ityouknow/spring-boot-examples">Spring Boot</a>
 
 * 其他<br/>
