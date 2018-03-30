@@ -67,7 +67,7 @@
         this.repositoryInformation = repositoryInformation;
         this.customImplementation = customImplementation;
         this.target = target;
-        // 获取query的查询策略：queryLookupStrategyKey？注入方式是怎样的没找到
+        // 获取query的查询策略：queryLookupStrategyKey？注入方式是怎样的没找到:@EnableJpaRepositories("xxx")这个参数可以配置：默认为CREATE_IF_NOT_FOUND
         QueryLookupStrategy lookupStrategy = getQueryLookupStrategy(queryLookupStrategyKey,
                 RepositoryFactorySupport.this.evaluationContextProvider);
         lookupStrategy = lookupStrategy == null ? getQueryLookupStrategy(queryLookupStrategyKey) : lookupStrategy;
