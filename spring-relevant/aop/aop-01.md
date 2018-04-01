@@ -40,6 +40,7 @@
 * 织入（Weaving）: `组装方面来创建一个被通知对象。`这可以在编译时完成（例如使用AspectJ编译器），也可以在运行时完成。Spring和其他纯JavaAOP框架一样，在运行时完成织入。
 
 #### 主要类说明
+
 ![] (./images/aop-class-relveant.png)
 
 #### 一些问题理解
