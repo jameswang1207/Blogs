@@ -21,7 +21,7 @@ wrk 的一个很好的特性就是能用很少的线程压出很大的并发量�
     make
 ```
 
-![] (./images/wrk/wrk-install.png)
+![](./images/wrk/wrk-install.png)
 
 12 threads and 100 connections 这个能看懂英文的都知道啥意思: 用12个线程模拟100个连接. 对应的参数 -t 和 -c 可以控制这两个参数,一般线程数不宜过多. 核数的2到4倍足够了,多了反而因为线程切换过多造成效率降低.<br>
 
@@ -43,7 +43,7 @@ wrk 默认超时时间是1秒. 这个有点短. 我一般设置为30秒. 这个�
 ```shell
 wrk -t12 -c100 -d30s -T30s --latency http://www.baidu.com
 ```
-![] (./images/wrk/avg-response.png)<br>
+![](./images/wrk/avg-response.png)<br>
 可以看到50%在0.4秒以内, %75在1.8s 以内. 看上去还不错
 
 #### 使用wrk对gate-way与zuul进行测试
@@ -52,4 +52,4 @@ wrk -t12 -c100 -d30s -T30s --latency http://www.baidu.com
     wrk -t 10 -c 200 -d 30s http://localhost:9001/api/admin/user/get
     wrk -t 10 -c 200 -d 30s http://localhost:9002/api/admin/user/get
 ```
-![] (./images/wrk/zuul-and-gateway.png)<br>
+![](./images/wrk/zuul-and-gateway.png)<br>
