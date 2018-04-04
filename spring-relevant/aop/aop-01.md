@@ -41,6 +41,6 @@
 
 #### 主要类说明
 
-![] (./images/aop-class-relveant.png)
+![](./images/aop-class-relveant.png)
 
 #### 一些问题理解
