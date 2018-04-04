@@ -37,7 +37,7 @@
 ```
 
 执行图解：
-![] (./jpa-image/call-01.png)
-![] (./jpa-image/call-02.png)
+![](./jpa-image/call-01.png)<br/>
+![](./jpa-image/call-02.png)
 
 
