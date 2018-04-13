@@ -33,4 +33,8 @@
 <a href="https://github.com/dianping/cat">CAT基于Java开发的实时应用监控平台，包括实时应用监控，业务监控(先标记一下?未解读)</a><br/>
 <a href="http://mp.weixin.qq.com/s/zDbcV_vJeBOnAYxK0WEJQQ">系统性能评价标准：Web系统大规模并发：电商秒杀与抢购</a>
 
+* cas 相关体系<br/>
+<a href="http://www.cnblogs.com/flying607/p/7598248.html">构建自己的cas服务器</a></br>
+<a href="https://github.com/apereo/cas-overlay-template">cas-overlay-template</a>
+
 
