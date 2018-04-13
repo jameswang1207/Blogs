@@ -30,6 +30,7 @@
 <a href="https://github.com/YunaiV/Blog">源码分析</a></br>
 <a href="http://mp.weixin.qq.com/s/krGXHpkQefpyq6WP9epFtg">java10</a></br>
 <a href="https://github.com/alibaba/jarslink">JarsLink(原名Titan) 是一个基于JAVA的模块化开发框架(先标记一下?未解读)</a></br>
-<a href="https://github.com/dianping/cat">CAT基于Java开发的实时应用监控平台，包括实时应用监控，业务监控(先标记一下?未解读)</a>
+<a href="https://github.com/dianping/cat">CAT基于Java开发的实时应用监控平台，包括实时应用监控，业务监控(先标记一下?未解读)</a><br/>
+<a href="http://mp.weixin.qq.com/s/zDbcV_vJeBOnAYxK0WEJQQ">系统性能评价标准：Web系统大规模并发：电商秒杀与抢购</a>
 
 
