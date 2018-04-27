@@ -23,6 +23,7 @@
 <a href="https://github.com/ityouknow/awesome-spring-boot">awesome-spring-boot</a><br/>
 <a href="https://github.com/ityouknow/spring-boot-examples">Spring Boot</a><br/>
 <a href="http://mp.weixin.qq.com/s/zRjokN97kBu__mcuEBC_Lg">spring容器及bean加载机制源码解读</a>
+<a href="https://www.ibm.com/developerworks/cn/education/opensource/os-cn-spring-trans/">spring 事物相关</a>
 
 * 其他<br/>
 <a href="https://github.com/jhipster/generator-jhipster">基于nodejs+yeoman的java代码生成器(ok)</a><br/>
