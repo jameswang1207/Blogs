@@ -38,6 +38,9 @@
 <a href="http://mp.weixin.qq.com/s/zDbcV_vJeBOnAYxK0WEJQQ">系统性能评价标准：Web系统大规模并发：电商秒杀与抢购</a><br/>
 <a href="http://mp.weixin.qq.com/s/sqIVgpxmaa9TT0Q5PiTtsw">web安全漏洞介绍<a/><br/>
 
+* CQRS 架构<br/>
+<a href="https://www.cnblogs.com/yjmyzz/archive/2016/03/03/cqrs-axonframework-sample.html">CQRS框架：AxonFramework 之 Hello World</a>
+
 * cas 相关体系<br/>
 <a href="http://www.cnblogs.com/flying607/p/7598248.html">构建自己的cas服务器</a></br>
 <a href="https://github.com/apereo/cas-overlay-template">cas-overlay-template</a>
