@@ -40,7 +40,8 @@
 
 * CQRS 架构<br/>
 <a href="https://www.cnblogs.com/yjmyzz/archive/2016/03/03/cqrs-axonframework-sample.html">CQRS框架：AxonFramework 之 Hello World</a><br/>
-<a href="https://blog.csdn.net/qq_31179577/article/list/2?">Axon Framework官方文档</a>
+<a href="https://blog.csdn.net/qq_31179577/article/list/2?">Axon Framework官方文档</a><br/>
+<a href="http://www.techweb.com.cn/network/system/2017-07-07/2553563.shtml">DDD CQRS架构和传统架构的优缺点比较</a>
 
 * cas 相关体系<br/>
 <a href="http://www.cnblogs.com/flying607/p/7598248.html">构建自己的cas服务器</a></br>
