@@ -39,7 +39,8 @@
 <a href="http://mp.weixin.qq.com/s/sqIVgpxmaa9TT0Q5PiTtsw">web安全漏洞介绍<a/><br/>
 
 * CQRS 架构<br/>
-<a href="https://www.cnblogs.com/yjmyzz/archive/2016/03/03/cqrs-axonframework-sample.html">CQRS框架：AxonFramework 之 Hello World</a>
+<a href="https://www.cnblogs.com/yjmyzz/archive/2016/03/03/cqrs-axonframework-sample.html">CQRS框架：AxonFramework 之 Hello World</a><br/>
+<a href="https://blog.csdn.net/qq_31179577/article/list/2?">Axon Framework官方文档</a>
 
 * cas 相关体系<br/>
 <a href="http://www.cnblogs.com/flying607/p/7598248.html">构建自己的cas服务器</a></br>
