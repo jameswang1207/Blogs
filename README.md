@@ -46,6 +46,7 @@
 
 * cas 相关体系<br/>
 <a href="http://www.cnblogs.com/flying607/p/7598248.html">构建自己的cas服务器</a></br>
-<a href="https://github.com/apereo/cas-overlay-template">cas-overlay-template</a>
+<a href="https://github.com/apereo/cas-overlay-template">cas-overlay-template</a></br>
+<a href="https://github.com/brettwooldridge/HikariCP">高性能数据库连接池</a> 
 
 
