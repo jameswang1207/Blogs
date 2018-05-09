@@ -14,7 +14,8 @@
 <a href="https://github.com/paymentrpc">支付系统老熊</a>
 
 * 规则引擎<br/>
-<a href="http://blog.csdn.net/qq_31179577/article/details/76585854">Drools 规则引擎(ok)</a>
+<a href="http://blog.csdn.net/qq_31179577/article/details/76585854">Drools 规则引擎(ok)</a><br/>
+<a href="https://github.com/ityouknow/drools-examples">drools-examples</a>
 
 * elasticsearch<br/>
 <a href="https://mp.weixin.qq.com/s/Xvc7f0nBaNVa7_DnzjCUiw">eBay的Elasticsearch性能调优实践</a>
