@@ -40,7 +40,9 @@
 <a href="http://mp.weixin.qq.com/s/sqIVgpxmaa9TT0Q5PiTtsw">web安全漏洞介绍<a/><br/>
 <a href="https://blog.csdn.net/ycyangcai/article/details/7749714">xacml讲解</a><br/>
 <a href="https://github.com/doczhcn/istio">istio中文文档</a><br/>
-  <a href="https://github.com/gothinkster">realworld 使用不同技术实现响应的东西</a>
+<a href="https://github.com/gothinkster">realworld 使用不同技术实现响应的东西</a><br/>
+<a href="https://github.com/xingshaocheng/architect-awesome">后端架构师技术图谱</a><br/>
+<a href="https://github.com/davideuler/architecture.of.internet-product">互联网公司技术架构，微信/淘宝/微博/腾讯/阿里/美团点评/百度/Google/Facebook/Amazon/eBay的架构，欢迎PR补充</a>
 
 * CQRS 架构<br/>
 <a href="https://www.cnblogs.com/yjmyzz/archive/2016/03/03/cqrs-axonframework-sample.html">CQRS框架：AxonFramework 之 Hello World</a><br/>
