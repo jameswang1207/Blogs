@@ -11,7 +11,8 @@
 <a href="https://github.com/jameswangAugmentum/Blogs/tree/master/jvm">java8 jvm</a>
 
 * 支付系统<br/>
-<a href="https://github.com/paymentrpc">支付系统老熊</a>
+<a href="https://github.com/paymentrpc">支付系统老熊</a><br/>
+<a href="https://github.com/cloudatee/fastpay">Fastpay的目标是打造一款开源的、轻量级的、微服务化的、可公私有云部署的、可定制化的集成聚合支付和资金清结算于一体的统一支付系统，满足互联网企业业务系统的收款和资金处理等需求</a>
 
 * 规则引擎<br/>
 <a href="http://blog.csdn.net/qq_31179577/article/details/76585854">Drools 规则引擎(ok)</a><br/>
