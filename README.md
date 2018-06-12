@@ -5,7 +5,8 @@
 * 分布式事物先关<br/>
 <a href="https://github.com/prontera/spring-cloud-rest-tcc">spring-cloud-rest-tcc</a><br/>
 <a href="https://github.com/changmingxie/tcc-transaction">tcc-transaction</a><br/>
-<a href="https://github.com/roncoo/roncoo-pay">roncoo-pay(ok)</a>
+<a href="https://github.com/roncoo/roncoo-pay">roncoo-pay(ok)</a><br>
+<a href="https://mp.weixin.qq.com/s/YgGcZPjrdezcU9u9WfNdOQ">分布式锁的多种实现方式</a>
 
 * jvm虚拟机<br/>
 <a href="https://github.com/jameswangAugmentum/Blogs/tree/master/jvm">java8 jvm</a>
