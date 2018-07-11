@@ -36,6 +36,7 @@
 > ```
 
 ## Docker 基本操作
+### 下面这些命令是在命令结束后容器就停止了
 * 启动容器
 ```sh 
     # 一次交互命令
@@ -51,5 +52,77 @@
    docker ps [-a][-l]
    # -a 列出全部容器
    # -l 最近新建的容器
-   # 不加参数
+   # 不加参数 返回的是真在运行的容器
+   docker inspect [容器的ID或是容器的名字]
+```
+
+* docker自定义容器的名字
+
+```sh
+    docker run --name='自定义名' -i -t images名字 /bin/bash
+```
+
+* 重新启动已经停止的容器
+```sh
+   docker start -i 容器名
+```
+
+* docker rm 删除停止的容器不能删除在运行的容器
+
+```sh
+    docker rm 容器id或是容器名
+```
+
+### 守护式容器
+
+* 什么是守护式容器
+> - 能长期运行
+> - 没有交互式会话
+> - 适合运行应用或者服务
+
+* 以守护进程形式运行容器
+```sh
+    docker run -i -t IMAGE /bin/bash
+    # 在结束时使用 ctrl+P 或者是 ctrl+Q技术容器
+
+    docker attach 【容器名、可以是ID】
+    # 怎样进入已经退出了的容器
+
+    docker run --name 容器的名字 -d 镜像名 【commond】【args】
+    docker run --name doc1 -d ubuntu /bin/bash -c "while true ; do echo hello world ; sleep 1; done"
+    # -d 使用后台进程进行运行
+```
+
+* 查看容器的日志
+```sh
+    docker logs [-f][-t][--tail] 容器名
+    # -f  --follows = true | false 默认为false 跟踪日志变化返回结构
+    # -t  --timestamps=true | false 默认为false 返回日志时间搓
+    -- tail = 'all' 返回全部日志 或是返回几条
+```
+
+* 容器内进程的运行情况
+```sh
+   docker top "容器名"
+```
+
+* 在运行的容器中启动新的进程
+```sh
+    docker exec [-d][-i][-t] 容器名 [commond][arg]
+```
+
+* 停止运行中的容器
+```sh
+ docker stop 容器名 发送命令给容器等待容器停止后返回相应的结果
+ docker kill 容器名 直接将进程杀死
+```
+
+* docker自带使用手册
+
+```sh
+    man docker-run
+    man docker-logs 
+    man docker-exec
+    man docker-top
+    .....
 ```
