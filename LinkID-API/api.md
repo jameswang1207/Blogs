@@ -1,6 +1,6 @@
 # 响应中的code值说明
 - HTTP status codes
-- 请求对照spring HttpStatus枚举值
+- 请求对照http响应头code
 
 # 错误信息和错误码对照表
 | errorCode | errorMessage | description |
