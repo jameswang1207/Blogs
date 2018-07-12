@@ -1,6 +1,6 @@
 # 响应中的code值说明
 - HTTP status codes
-- 请求对照http响应头code
+- 请求对照http请求头code
 
 # 错误信息和错误码对照表
 | errorCode | errorMessage | description |
@@ -51,7 +51,7 @@
     "code": 412,
     "message": "Precondition Failed",
     "data": {
-        "errorCode": 10001,
+        "errorCode": 100001,
         "errorMessage": "No user found for conditions.",
         "details": [
             "Required field userid not found."
@@ -124,6 +124,8 @@ http://{server-domain}/api/app/getapps
 | ---- | ---- | -------- | ------- |
 | appid | string | YES | 发起调用请求的应用id|
 | userid | string | YES | 学号或工号或身份证号|
+| page | int | 第几页 | No 默认为 1 |
+| perpage | int | 每页条数 | No 默认为 20 |
 
 - OK response body
 
@@ -131,6 +133,12 @@ http://{server-domain}/api/app/getapps
 {
     "code": "200",
     "message": "OK",
+    "page": {
+        "totalCount": "总条数",
+        "pageCount": "总页数",
+        "currentPage": "当前第几页",
+        "perPage": "每页多少条"
+    },
     "data": [{
             "name": "应用名称1",
             "url": "应用链接1",
