@@ -6,7 +6,7 @@
 | errorCode | errorMessage | description |
 |------|----------|------------|
 | 10001 | No user found for conditions | No user found for user query condition. |
-| 10002 | No apps found for conditions | No apps found for user query condition. |
+| 10002 | No apps found for conditions | No apps found for apps query condition. |
 
 # Response type
 
