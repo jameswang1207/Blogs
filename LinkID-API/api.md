@@ -120,12 +120,12 @@ http://{server-domain}/api/app/getapps
 
 - Request Parameters:
 
-| Name | Type | Required | Example |
+| Name | Type | Required | 说明 |
 | ---- | ---- | -------- | ------- |
 | appid | string | YES | 发起调用请求的应用id|
 | userid | string | YES | 学号或工号或身份证号|
-| page | int | 第几页 | No 默认为 1 |
-| perpage | int | 每页条数 | No 默认为 20 |
+| page | int | No 默认为 1 | 第几页 |
+| perpage | int | No 默认为 20 | 每页条数|
 
 - OK response body
 
