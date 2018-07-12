@@ -51,7 +51,7 @@
     "code": 412,
     "message": "Precondition Failed",
     "data": {
-        "errorCode": 100001,
+        "errorCode": 10001,
         "errorMessage": "No user found for conditions.",
         "details": [
             "Required field userid not found."
