@@ -154,4 +154,8 @@
 ```sh
   # 启动一个容器并开启在容器的80端口
   sudo docker run -p 88 --name web -i -t ubuntu /bin/bash
+  # 查看docker的端口
+  sudo docker port web
+  # 查看docker进程的运行情况
+  sudo docker top web
 ```
