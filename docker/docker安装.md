@@ -84,7 +84,7 @@
 * 以守护进程形式运行容器
 ```sh
   docker run -i -t IMAGE /bin/bash
-  # 在结束时使用 ctrl+P 或者是 ctrl+Q技术容器
+  # 在结束时使用 退出不结束(连续按Ctrl+q和Ctrl+p)
 
   docker attach 【容器名、可以是ID】
   # 怎样进入已经退出了的容器
