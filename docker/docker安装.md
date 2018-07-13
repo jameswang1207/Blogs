@@ -158,4 +158,69 @@
   sudo docker port web
   # 查看docker进程的运行情况
   sudo docker top web
+  # 查看docker的信息
+  sudo docker info
+```
+
+
+* docker镜像相关介绍
+```sh
+  # 列出镜像
+  sudo docker images [optsions] [repository]
+  -a, --all=false 显示所有进项
+  -f, --filter=[] 过滤
+  --no-trunc=false 指定使用不使用截断的方式出来
+  -q,--quiet=false 只显示进项id
+  # 使用inspect查看镜像的详细信息
+  docker inspect [iamges]
+  # 删除镜像
+  docker rmi 【id】
+  # 删除ubuntu中的全部镜像
+  docker rmi -q [repository]
+```
+
+* 镜像仓库
+- repository : 其中包含的是一个个独立的镜像
+- regintry : 包含了很多个repository
+- TAG : 如：16.04 那么tag与repository构成镜像的唯一标识
+
+* 获取和推送镜像
+- 查找镜像
+```sh
+  docker search [repository] 
+  -s 星级大于某个值
+  --no-trunc=false指定使用不使用截断的方式出来
+```
+- 拉取镜像
+```sh
+  # docker pull [操作]
+  sudo  docker ubuntu:16.04
+  # 使用--registry-mirror选项
+  # 修改：/etc/default/docker
+  # 添加：DOCKER_OPTS="--registry-mirror=xxxxxxx"
+  # 启动docker守护进程
+  service docker restart
+```
+
+- 推送镜像
+```sh
+  docker push REPOSITORY
+```
+
+* 镜像的构建
+- 保存对容器的修改
+- 自定义镜像的能力
+- 以软件的形式打包并分发服务及应用环境
+- docker commit 通过容器构建镜像
+- docker build 通过Dockerfile文件构建
+```sh
+  docker commit [optins] 容器的名字 [repository][:tag]
+  -a 指定作者
+  -m 指定提交信息
+  -p 指定在运行的容器在提交过程中不停止
+  docker commit -a jameswang -m testjames -p web  jameswang/tag
+
+  # 使用Dockerfile
+  # 使用docker build命令
+  
 ```
