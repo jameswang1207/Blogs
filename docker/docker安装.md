@@ -162,7 +162,6 @@
   sudo docker info
 ```
 
-
 * docker镜像相关介绍
 ```sh
   # 列出镜像
@@ -219,8 +218,7 @@
   -m 指定提交信息
   -p 指定在运行的容器在提交过程中不停止
   docker commit -a jameswang -m testjames -p web  jameswang/tag
-
   # 使用Dockerfile
   # 使用docker build命令
-  
+  docker build -t="镜像的名字"
 ```
