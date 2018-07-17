@@ -40,4 +40,44 @@
 ```
 
 ### Docker 容器的互联
+* Docker 在默认情况下是应许所有容器相互连接的
+
+```sh
+  # 实验的Dockerfile
+  FROM ubuntu:16.04
+  RUN apt-get install -y ping
+  RUN apt-get install -y nginx
+  RUN apt-get install -y curl
+  EXPOSE 80
+  CMD /bin/bash
+  # 构建镜像
+  docker build -t jamesimages .
+  # Docker 默认情况下，同一台机器上的容器间是通过网桥互相连接的
+  # 默认参数：--icc=true docker应许容器间的连接
+  # docker 在重新启动时每次的ip都会变化
+  # --link通过容器代号来访问容器，这样避免了通过ip地址访问容器ip发生变化带来的不便。--link后面的为需要访问的容器
+  docker run --link=[container_name]:[alias] [commond]
+  docker run -it --name ct2 --link=ct1:webct1 jamesimages
+  # 这样做完后，在环境变量和/etc/hosts文件会发生改变
+```
+
+* 拒绝容器间互联
+```sh
+  --icc=false docker应许容器间的连接
+  # 修改docker配置文件/etc/default/docker
+  DOKCER_OPTS="--icc=false"
+```
+* 应许特定容器间互联
+```sh
+  # 在docker启动配置文件进项设置
+  --icc=false --iptables=true
+  # 在容器启动时使用--link命令来进行访问
+  --link
+  # 修改docker配置文件/etc/default/docker
+  DOKCER_OPTS="--icc=false --iptables=true"
+  # 清空iptables
+  sudo iptables -F
+  sudo iptables -L -n
+```
+
 ### Docker 容器与外部网络的连接
