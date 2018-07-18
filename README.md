@@ -69,7 +69,7 @@
 <a href="https://mp.weixin.qq.com/s/XUBXacXTX_CzeCxig0eNjw">Java和Docker限制的那些事儿</a><br/>
 <a href="https://mp.weixin.qq.com/s/UKwZkwYmDSVTbj62ACuapg">Java工程师成神之路</a>
 
-* 比较关注的项目2018-07
+* 比较关注的项目2018-07<br/>
 <a href="https://github.com/openshift/origin">openshift</a><br/>
 <a href="https://github.com/istio/istio">openshift</a><br/>
 <a href="https://github.com/kubernetes/kubernetes">k8s</a><br/>
