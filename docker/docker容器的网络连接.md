@@ -81,3 +81,24 @@
 ```
 
 ### Docker 容器与外部网络的连接
+* ip_forward
+- --ip_forward=true，是否允许转发流量，设置为true，在容器启动时允许流量转发
+```sh
+  ps -ef | grep  nginx
+  sysctl net.ipv4.conf.all.forwarding
+```
+* iptables
+- iptables 是与Linux内核集成的包过滤防火墙系统，几乎所有的Linux发行版本都会包含iptables的功能。
+
+- 表(table)
+- 链(chain)：input、output、forward
+- 规则(rule)：accept、reject、drop
+
+```sh
+  # 查看iptable
+  sudo iptables -L
+  sudo iptables -h
+  # 查看对应参数
+```
+* 允许端口映射访问
+* 限制容器访问
