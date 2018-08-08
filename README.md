@@ -45,7 +45,9 @@
 <a href="https://github.com/doczhcn/istio">istio中文文档</a><br/>
 <a href="https://github.com/gothinkster">realworld 使用不同技术实现响应的东西</a><br/>
 <a href="https://github.com/xingshaocheng/architect-awesome">后端架构师技术图谱</a><br/>
-<a href="https://github.com/davideuler/architecture.of.internet-product">互联网公司技术架构，微信/淘宝/微博/腾讯/阿里/美团点评/百度/Google/Facebook/Amazon/eBay的架构，欢迎PR补充</a>
+<a href="https://github.com/davideuler/architecture.of.internet-product">互联网公司技术架构，微信/淘宝/微博/腾讯/阿里/美团点评/百度/Google/Facebook/Amazon/eBay的架构，欢迎PR补充</a><br/>
+<a href="https://github.com/ripienaar/free-for-dev">devopes</a><br/>
+<a href="https://github.com/binhnguyennus/awesome-scalability">scalability</a>
 
 * CQRS 架构<br/>
 <a href="https://www.cnblogs.com/yjmyzz/archive/2016/03/03/cqrs-axonframework-sample.html">CQRS框架：AxonFramework 之 Hello World</a><br/>
