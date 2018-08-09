@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: ReplicationController                            #副本控制器RC
+metadata:
+  name: myweb                                          #RC的名称，全局唯一
+spec:
+  replicas: 2                                         #Pod副本的期待数量
+  selector:
+    app: myweb                                         #符合目标的Pod拥有此标签
+  template:                                     #根据此模板创建Pod的副本（实例）
+    metadata:
+      labels:
+        app: myweb                                    #Pod副本拥有的标签，对应RC的Selector
+    spec:
+      containers:                                      #Pod内容器的定义部分
+      - name: myweb                 #容器的名称
+        image: docker.io/kubeguide/tomcat-app:v1              #容器对应的Docker image
+        ports:
+        - containerPort: 8080                 #容器应用监听的端口号

@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service         #类型为k8s Service
+metadata:
+  name: myweb         #该Service的全局唯一名称
+spec:
+  type: NodePort
+  ports:
+   - port: 8080       #Service提供服务的端口号
+     nodePort: 30001
+  selector:           #Service对应的Pod拥有这里定义的标签
+    app: myweb
