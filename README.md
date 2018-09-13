@@ -73,6 +73,7 @@
 <a href="https://github.com/houshanren/hangzhou_house_knowledge">2017年买房经历总结出来的买房购房知识分享给大家，希望对大家有所帮助。买房不易，且买且珍惜</a><br/>
 <a href="https://mp.weixin.qq.com/s/XUBXacXTX_CzeCxig0eNjw">Java和Docker限制的那些事儿</a><br/>
 <a href="https://mp.weixin.qq.com/s/UKwZkwYmDSVTbj62ACuapg">Java工程师成神之路</a>
+- [MongoDB集群搭建及使用](https://blog.csdn.net/supermapsupport/article/details/78953080)
 
 * 比较关注的项目2018-07<br/>
 <a href="https://github.com/openshift/origin">openshift</a><br/>
