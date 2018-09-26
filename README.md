@@ -85,6 +85,7 @@
 - [rocket安装](https://blog.csdn.net/c_yang13/article/details/76836753)<br/>
 <a href="https://github.com/Unknwon/the-way-to-go_ZH_CN">the-way-to-go_ZH_CN</a><br/>
 <a href="https://github.com/knative">Knative</a>
+- [Google开源其Java容器化工具Jib，简化镜像构建全流程](https://mp.weixin.qq.com/s/--DRbX84jUP3Sb_95XGyeA)
 
 
 
