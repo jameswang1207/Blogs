@@ -11,5 +11,17 @@ ENV PATH $PATH:$JAVA_HOME/bin
 ### 使用Dockerfile创建镜像
 
 ```sh
-docker build -t jdk-8u144:20180927 . -f Dockerfile
+sudo docker build -t jdk-8u192:latest . -f Dockerfile
 ```
+
+### 给你要上传的镜像打个tag
+
+```sh
+docker tag [source_name] xxx.xxx.xx.xx:8082/[target_name]:latest
+```
+
+### push 
+
+```sh
+sudo  docker push xxx.xxx.xx.xx:8082/jdk-8u192
+``
