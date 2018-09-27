@@ -11,5 +11,5 @@ ENV PATH $PATH:$JAVA_HOME/bin
 ### 使用Dockerfile创建镜像
 
 ```sh
-docker build -t jdk-8u144:20180927 -f Dockerfile
+docker build -t jdk-8u144:20180927 . -f Dockerfile
 ```
