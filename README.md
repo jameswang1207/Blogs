@@ -87,6 +87,7 @@
 <a href="https://github.com/knative">Knative</a>
 - [Google开源其Java容器化工具Jib，简化镜像构建全流程](https://mp.weixin.qq.com/s/--DRbX84jUP3Sb_95XGyeA)
 - [maven私服nexus3.x环境配置](https://www.xncoding.com/2017/09/02/tool/nexus.html)
+- [使用Nexus 搭建Docker 仓库](https://mritd.me/2017/01/08/set-up-docker-registry-by-nexus/)
 
 
 
