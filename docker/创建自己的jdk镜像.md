@@ -24,13 +24,14 @@ docker tag [source_name] xxx.xxx.xx.xx:8082/[target_name]:latest
 
 ```sh
 sudo  docker push xxx.xxx.xx.xx:8082/jdk-8u192
+```
 
-``
+### search私服中中镜像
 
-### search 私服中中镜像
 ```sh
 docker search xxx.xxx.xx.xx:8082/ruijie/jdk-8u192
 ```
+
 ### pull 私服中的镜像
 
 ```sh
