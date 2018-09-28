@@ -38,3 +38,8 @@ docker search xxx.xxx.xx.xx:8082/jdk-8u192
 sudo  docker pull  xxx.xxx.xx.xx:8082/jdk-8u192
 ```
 
+###  Maven 插件之 docker-maven-plugin 的使用
+- [Maven 插件之 docker-maven-plugin 的使用](https://blog.csdn.net/aixiaoyang168/article/details/77453974)
+
+
+
