@@ -49,5 +49,12 @@ sudo  docker pull  xxx.xxx.xx.xx:8082/jdk-8u192
 - mvn clean package docker:build -DpushImageTag 执行 build 并 push 指定 tag 的镜像
 - 注意：这里必须指定至少一个 imageTag，它可以配置到 POM 中，也可以在命令行指定。命令行指定如下：mvn clean package docker:build -DpushImageTags DdockerImageTags=imageTag_1 -DdockerImageTags=imageTag_2
 
+### 给mongo添加用户密码校验
+## 进入目录
+use dbname 
+## 创建用户
+db.createUser({user:"cas-ticket", pwd:"111111", roles:[{role:"readWrite", db: "cas"}]})
+
+
 
 
