@@ -24,3 +24,6 @@ tar: Ignoring unknown extended header keyword `LIBARCHIVE.xattr.security.selinux
 openshift-origin-server-v3.10.0-dd10d17-linux-64bit/openshift-node-config
 tar: Ignoring unknown extended header keyword `LIBARCHIVE.xattr.security.selinux'
 ```
+# openshift install shell
+
+- [Red Hat,](https://github.com/gshipley)
