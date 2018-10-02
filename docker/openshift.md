@@ -27,4 +27,4 @@ tar: Ignoring unknown extended header keyword `LIBARCHIVE.xattr.security.selinux
 # openshift install shell
 
 - [Red Hat,](https://github.com/gshipley)
-- 安装过程中可能会出现重试现象，Ctrl+ 重试
+- 安装过程中可能会出现重试现象，Ctrl+z 重试
