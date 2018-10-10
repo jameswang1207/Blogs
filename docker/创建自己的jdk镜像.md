@@ -38,6 +38,26 @@ docker search xxx.xxx.xx.xx:8082/jdk-8u192
 sudo  docker pull  xxx.xxx.xx.xx:8082/jdk-8u192
 ```
 
+### docker 中添加host
+
+```sh
+--hostname ：指定hostname;
+--net : 指定网络模式
+--ip：指定IP
+--add-host ：指定往/etc/hosts添加的host
+```
+- example
+
+```
+docker run -itd --name hadoop0 --hostname hadoop0 --net network_my --ip 192.168.10.30 --add-host hadoop1:192.168.10.31 --add-host hadoop2:192.168.10.32  -d -P -p 50070:50070 -p 8088:8088 hadoop:master
+```
+---------------------
+作者：淡淡的倔强 
+来源：CSDN 
+原文：https://blog.csdn.net/u012834750/article/details/80508464?utm_source=copy 
+版权声明：本文为博主原创文章，转载请附上博文链接！
+
+
 ###  Maven 插件之 docker-maven-plugin 的使用
 - [Maven 插件之 docker-maven-plugin 的使用](https://blog.csdn.net/aixiaoyang168/article/details/77453974)
 
