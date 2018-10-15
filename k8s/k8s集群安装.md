@@ -46,4 +46,20 @@ vi /etc/hosts
 172.17.8.78 node01
 172.17.8.79 node02
 ```
+## 下载二进制文件
+
+- [下载版本1.11](https://v1-11.docs.kubernetes.io/docs/imported/release/notes/) 
+- 解压到home目录下并配置环境变量
+
+```shell
+# master节点，其余节点一致，将k8s_home目录进行修改即可
+export K8S_HOME=/home/master/k8s/kubernetes/server
+export PATH=.:${K8S_HOME}/bin:$PATH
+```
+
+
+
+
+
+
 
