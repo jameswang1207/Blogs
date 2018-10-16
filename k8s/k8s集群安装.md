@@ -296,7 +296,70 @@ WantedBy=multi-user.target
  etcdctl rm --recursive  /calico
 ```
 
+### 注意事项
+- 当node节点上的ip配置出现失败时，那么calico将其相关信息存放在etcd中，因此在在修改后的操作是
 
+```shell
+# 先停止相关服务每个节点
+# 先将每个节点上的docker停止
+service docker stop
+# 停止每个节点上的kube-calico服务
+service kube-calico stop
+# 在ectd节点上删除calico节点
+etcdctl rm --recursive  /calico
+```
+
+# calico可用性验证
+
+## 查看容器运行情况
+```shell
+$ docker ps
+CONTAINER ID   IMAGE                COMMAND        CREATED ...
+4d371b58928b   calico/node:v2.6.2   "start_runit"  3 hours ago...
+```
+## 查看节点运行情况
+```shell
+# 查看连接信息
+calicoctl node status
+```
+### master节点状态(172.17.8.77)
+```shell
+Calico process is running.
+IPv4 BGP status
++--------------+-------------------+-------+----------+-------------+
+| PEER ADDRESS |     PEER TYPE     | STATE |  SINCE   |    INFO     |
++--------------+-------------------+-------+----------+-------------+
+| 172.17.8.79  | node-to-node mesh | up    | 14:46:16 | Established |
+| 172.17.8.78  | node-to-node mesh | up    | 14:46:24 | Established |
++--------------+-------------------+-------+----------+-------------+
+```
+### node01节点状态(172.17.8.78)
+```shell
+Calico process is running.
+IPv4 BGP status
++--------------+-------------------+-------+----------+-------------+
+| PEER ADDRESS |     PEER TYPE     | STATE |  SINCE   |    INFO     |
++--------------+-------------------+-------+----------+-------------+
+| 172.17.8.77  | node-to-node mesh | up    | 14:46:24 | Established |
+| 172.17.8.79  | node-to-node mesh | up    | 14:46:25 | Established |
++--------------+-------------------+-------+----------+-------------+
+IPv6 BGP status
+No IPv6 peers found.
+```
+
+### node02节点状态(172.17.8.79)
+```shell
+Calico process is running.
+IPv4 BGP status
++--------------+-------------------+-------+----------+-------------+
+| PEER ADDRESS |     PEER TYPE     | STATE |  SINCE   |    INFO     |
++--------------+-------------------+-------+----------+-------------+
+| 172.17.8.77  | node-to-node mesh | up    | 14:46:15 | Established |
+| 172.17.8.78  | node-to-node mesh | up    | 14:46:24 | Established |
++--------------+-------------------+-------+----------+-------------+
+IPv6 BGP status
+No IPv6 peers found.
+```
 
 
 
