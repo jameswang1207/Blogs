@@ -22,6 +22,25 @@ systemctl daemon-reload
 service docker start
 ```
 
+## 接受所有ip的数据包转发
+```shell
+vi /lib/systemd/system/docker.service
+   
+#找到ExecStart=xxx，在这行上面加入一行，内容如下：(k8s的网络需要)
+ExecStartPost=/sbin/iptables -I FORWARD -s 0.0.0.0/0 -j ACCEPT
+```
+## 设置系统参数 - 允许路由转发，不对bridge的数据进行处理
+```shell
+#写入配置文件
+$ cat <<EOF > /etc/sysctl.d/k8s.conf
+net.ipv4.ip_forward = 1
+net.bridge.bridge-nf-call-ip6tables = 1
+net.bridge.bridge-nf-call-iptables = 1
+EOF
+#生效配置文件
+$ sysctl -p /etc/sysctl.d/k8s.conf
+```shell
+
 # 系统设置（所有节点）
 ## 防火墙配置
 ```shell
@@ -242,7 +261,8 @@ RestartSec=10
 WantedBy=multi-user.target
 ```
 ###  下载calicoctl
-- [下载路径](https://github.com/projectcalico/calicoctl/releases/tag/v3.2.3)
+- [下载路径：calicoctl](https://github.com/projectcalico/calicoctl/releases/tag/v3.2.3)
+- [下载插件：calico、calico-ipam](https://github.com/projectcalico/cni-plugin/releases)
 - 并将其放在k8sbin目录下
 - 将其权限修改为755
 
