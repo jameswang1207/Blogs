@@ -290,6 +290,11 @@ WantedBy=multi-user.target
 - 并将其放在k8sbin目录下
 - 将其权限修改为755
 
+### 在pod被修改时，其ip地址一致存放在ectd中，因此我们需要将etcd中原有的ip地址删除
+```shell
+ # 使用的命令ectdctl，因为calico在ip失效后不会自动删除
+ etcdctl rm --recursive  /calico
+```
 
 
 
