@@ -163,8 +163,33 @@ RestartSec=5
 WantedBy=multi-user.target
 ```
 
-
-
+# 部署Scheduler（主节点）
+## 配置为启动服务
+```shell
+# 参考后配置文件生成在/home/master/k8s/k8s-config/kubernetes-starter目录中
+#把服务配置文件copy到系统服务目录
+cd /home/master/k8s/k8s-config/kubernetes-starter/target/master-node
+# 拷贝文件到指定目录
+cp ./kube-scheduler.service /lib/systemd/system/
+systemctl enable kube-scheduler.service
+service kube-scheduler start
+journalctl -f -u kube-scheduler
+```
+## 配置文件说明
+```shell
+Description=Kubernetes Scheduler
+Documentation=https://github.com/GoogleCloudPlatform/kubernetes
+[Service]
+ExecStart=/home/master/k8s/kubernetes/server/bin/kube-scheduler \
+  --address=127.0.0.1 \
+  --master=http://127.0.0.1:8080 \
+  --leader-elect=true \
+  --v=2
+Restart=on-failure
+RestartSec=5
+[Install]
+WantedBy=multi-user.target
+```
 
 
 
