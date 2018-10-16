@@ -129,6 +129,39 @@ LimitNOFILE=65536
 WantedBy=multi-user.target
 ```
 
+# 部署ControllerManager（主节点）
+## 配置为启动服务
+```shell
+# 参考后配置文件生成在/home/master/k8s/k8s-config/kubernetes-starter目录中
+#把服务配置文件copy到系统服务目录
+cd /home/master/k8s/k8s-config/kubernetes-starter/target/master-node
+# 拷贝文件到指定目录
+cp ./kube-controller-manager.service /lib/systemd/system/
+systemctl enable kube-controller-manager.service
+service kube-controller-manager start
+journalctl -f -u kube-apiserver
+```
+## 配置文件说明
+```shell
+Description=Kubernetes Controller Manager
+Documentation=https://github.com/GoogleCloudPlatform/kubernetes
+[Service]
+ExecStart=/home/master/k8s/kubernetes/server/bin/kube-controller-manager \
+  --address=127.0.0.1 \
+  --master=http://127.0.0.1:8080 \
+  --allocate-node-cidrs=true \
+  --service-cluster-ip-range=10.68.0.0/16 \
+  --cluster-cidr=172.20.0.0/16 \
+  --cluster-name=kubernetes \
+  --leader-elect=true \
+  --cluster-signing-cert-file= \
+  --cluster-signing-key-file= \
+  --v=2
+Restart=on-failure
+RestartSec=5
+[Install]
+WantedBy=multi-user.target
+```
 
 
 
