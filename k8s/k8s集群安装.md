@@ -360,7 +360,7 @@ IPv4 BGP status
 IPv6 BGP status
 No IPv6 peers found.
 ```
-
+# 配置kubectl命令（任意节点）
 
 
 
