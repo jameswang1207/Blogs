@@ -57,6 +57,13 @@ export K8S_HOME=/home/master/k8s/kubernetes/server
 export PATH=.:${K8S_HOME}/bin:$PATH
 ```
 
+## 下载etc
+- [v3.3.10](https://github.com/etcd-io/etcd/releases)
+- 将etcd解压并将ectd、etcdctl拷贝到k8sbin目录中
+
+# 生成k8s必要的配置文件
+- [生成配置文件参考](https://github.com/liuyi01/kubernetes-starter)
+
 
 
 
