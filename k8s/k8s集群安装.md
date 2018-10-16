@@ -244,6 +244,8 @@ WantedBy=multi-user.target
 ###  下载calicoctl
 - [下载路径](https://github.com/projectcalico/calicoctl/releases/tag/v3.2.3)
 - 并将其放在k8sbin目录下
+- 将其权限修改为755
+
 
 
 
