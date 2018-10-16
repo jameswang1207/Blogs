@@ -139,7 +139,7 @@ cd /home/master/k8s/k8s-config/kubernetes-starter/target/master-node
 cp ./kube-controller-manager.service /lib/systemd/system/
 systemctl enable kube-controller-manager.service
 service kube-controller-manager start
-journalctl -f -u kube-apiserver
+journalctl -f -u kube-controller-manager
 ```
 ## 配置文件说明
 ```shell
