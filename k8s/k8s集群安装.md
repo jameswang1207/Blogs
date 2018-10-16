@@ -191,6 +191,62 @@ RestartSec=5
 WantedBy=multi-user.target
 ```
 
+# 部署CalicoNode（所有节点）
+# Calicos使用的是IPtable因此效率更加高效写
+## 配置为启动服务(calico是通过系统服务+docker方式完成的)
+```shell
+# 参考后配置文件生成在/home/master/k8s/k8s-config/kubernetes-starter目录中
+#把服务配置文件copy到系统服务目录
+cd /home/master/k8s/k8s-config/kubernetes-starter/target/master-node
+# 拷贝文件到指定目录
+cp ./kube-calico.service /lib/systemd/system
+systemctl enable kube-calico.service
+service kube-calico start
+journalctl -f -u kube-calico
+```
+
+## 配置文件说明
+```shell
+[Unit]
+Description=calico node
+After=docker.service
+Requires=docker.service
+
+[Service]
+User=root
+PermissionsStartOnly=true
+ExecStart=/usr/bin/docker run --net=host --privileged --name=calico-node \
+  -e ETCD_ENDPOINTS=http://172.17.8.77:2379 \
+  -e CALICO_LIBNETWORK_ENABLED=true \
+  -e CALICO_NETWORKING_BACKEND=bird \
+  -e CALICO_DISABLE_FILE_LOGGING=true \
+  -e CALICO_IPV4POOL_CIDR=172.20.0.0/16 \
+  -e CALICO_IPV4POOL_IPIP=off \
+  -e FELIX_DEFAULTENDPOINTTOHOSTACTION=ACCEPT \
+  -e FELIX_IPV6SUPPORT=false \
+  -e FELIX_LOGSEVERITYSCREEN=info \
+  -e FELIX_IPINIPMTU=1440 \
+  -e FELIX_HEALTHENABLED=true \
+  -e IP= \
+  -v /var/run/calico:/var/run/calico \
+  -v /lib/modules:/lib/modules \
+  -v /run/docker/plugins:/run/docker/plugins \
+  -v /var/run/docker.sock:/var/run/docker.sock \
+  -v /var/log/calico:/var/log/calico \
+  registry.cn-hangzhou.aliyuncs.com/imooc/calico-node:v2.6.2
+ExecStop=/usr/bin/docker rm -f calico-node
+Restart=always
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target
+```
+###  下载calicoctl
+- [下载路径](https://github.com/projectcalico/calicoctl/releases/tag/v3.2.3)
+- 并将其放在k8sbin目录下
+
+
+
 
 
 
