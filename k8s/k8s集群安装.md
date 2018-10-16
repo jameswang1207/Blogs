@@ -6,6 +6,30 @@
 | centos7 | 172.17.8.78 | worker |   4    | 16G | node01 |
 | centos7 | 172.17.8.79 | worker |   4    | 16G | node02 |
 
+# 给主机配置ip时，一定将dhcp去除
+```shell
+TYPE=Ethernet
+PROXY_METHOD=none
+BROWSER_ONLY=no
+BOOTPROTO=static
+DEFROUTE=yes
+IPV4_FAILURE_FATAL=no
+IPV6INIT=yes
+IPV6_AUTOCONF=yes
+IPV6_DEFROUTE=yes
+IPV6_FAILURE_FATAL=no
+IPV6_ADDR_GEN_MODE=stable-privacy
+NAME=ens160
+UUID=c9c5f8e2-8e1c-4d47-8288-0979c44e1888
+DEVICE=ens160
+ONBOOT=yes
+IPADDR=172.17.8.77
+GATEWAY=xxx.xxx.xxx.xxx
+NETMASK=255.255.255.0
+DNS1=xxx.xxx.xxx.xxx
+```
+
+
 # 安装必要的软件
 ```shell
 # epel-release软件包，这个软件包会自动配置yum的软件仓库
