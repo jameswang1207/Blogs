@@ -69,7 +69,7 @@ export PATH=.:${K8S_HOME}/bin:$PATH
 - [生成配置文件参考](https://github.com/liuyi01/kubernetes-starter)
 
 # 部署ectd
-### 主节点中配置etcd
+### 主节点中配置etcd（在生产环境中etcd必须部署集群模式）
 
 ```sh
 #参考后配置文件生成在/home/master/k8s/k8s-config/kubernetes-starter目录中
@@ -85,6 +85,48 @@ $ mkdir -p /var/lib/etcd
 $ service etcd start
 # 查看服务日志，看是否有错误信息，确保服务正常
 $ journalctl -f -u etcd.service
+```
+
+# 部署APIServer（主节点）
+## 配置为启动服务
+```shell
+# 参考后配置文件生成在/home/master/k8s/k8s-config/kubernetes-starter目录中
+#把服务配置文件copy到系统服务目录
+cd /home/master/k8s/k8s-config/kubernetes-starter/target/master-node
+# 拷贝文件到指定目录
+cp  ./kube-apiserver.service /lib/systemd/system/
+systemctl enable kube-apiserver.service
+service kube-apiserver start
+journalctl -f -u kube-apiserver
+```
+
+## 文件配置说明
+```shell
+Description=Kubernetes API Server
+Documentation=https://github.com/GoogleCloudPlatform/kubernetes
+After=network.target
+[Service]
+ExecStart=/home/master/k8s/kubernetes/server/bin/kube-apiserver \
+  --admission-control=NamespaceLifecycle,LimitRanger,DefaultStorageClass,ResourceQuota,NodeRestriction \
+  --insecure-bind-address=0.0.0.0 \
+  --kubelet-https=false \
+  --service-cluster-ip-range=10.68.0.0/16 \
+  --service-node-port-range=20000-40000 \
+  --etcd-servers=http://172.17.8.77:2379 \
+  --enable-swagger-ui=true \
+  --allow-privileged=true \
+  --audit-log-maxage=30 \
+  --audit-log-maxbackup=3 \
+  --audit-log-maxsize=100 \
+  --audit-log-path=/var/lib/audit.log \
+  --event-ttl=1h \
+  --v=2
+Restart=on-failure
+RestartSec=5
+Type=notify
+LimitNOFILE=65536
+[Install]
+WantedBy=multi-user.target
 ```
 
 
