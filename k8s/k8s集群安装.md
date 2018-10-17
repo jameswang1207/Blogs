@@ -484,8 +484,9 @@ NAME          STATUS    ROLES     AGE       VERSION
 172.17.8.79   Ready     <none>    2h        v1.10.0
 ```
 
-## 遗留问题
-
+## 遗留问题（如何打包如下镜像）
+- 网络配置中的镜像
+- 使用pause镜像
 
 
 
