@@ -360,7 +360,17 @@ IPv4 BGP status
 IPv6 BGP status
 No IPv6 peers found.
 ```
-# 配置kubectl命令（任意节点）
+
+# 配置kubectl命令工具的安装
+### 相关配置：配置api-server和上下文
+```shell
+#指定apiserver地址（ip替换为你自己的api-server地址）
+kubectl config set-cluster kubernetes  --server=http://172.17.8.77:8080
+#指定设置上下文，指定cluster
+kubectl config set-context kubernetes --cluster=kubernetes
+#选择默认的上下文
+kubectl config use-context kubernetes
+```
 
 
 
