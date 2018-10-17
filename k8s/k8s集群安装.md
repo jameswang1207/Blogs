@@ -361,7 +361,7 @@ IPv6 BGP status
 No IPv6 peers found.
 ```
 
-# 配置kubectl命令工具的安装
+# 配置kubectl命令工具的安装（任意节点）
 ### 相关配置：配置api-server和上下文
 ```shell
 #指定apiserver地址（ip替换为你自己的api-server地址）
@@ -371,6 +371,103 @@ kubectl config set-context kubernetes --cluster=kubernetes
 #选择默认的上下文
 kubectl config use-context kubernetes
 ```
+# 配置kubelet（工作节点）
+## 部署：
+```shell
+#确保相关目录存在
+mkdir -p /var/lib/kubelet
+mkdir -p /etc/kubernetes
+mkdir -p /etc/cni/net.d
+
+cd /home/node01/k8s/k8s-config/kubernetes-starter/target/worker-node
+#复制kubelet服务配置文件
+cp ./kubelet.service /lib/systemd/system/
+#复制kubelet依赖的配置文件
+cp ./kubelet.kubeconfig /etc/kubernetes/
+#复制kubelet用到的cni插件配置文件
+cp ./10-calico.conf /etc/cni/net.d/
+
+systemctl enable kubelet.service
+service kubelet start
+journalctl -f -u kubelet
+```
+## 相关配置文件介绍
+```shell
+# kubelet.service 介绍
+[Unit]
+Description=Kubernetes Kubelet
+Documentation=https://github.com/GoogleCloudPlatform/kubernetes
+After=docker.service
+Requires=docker.service
+
+[Service]
+WorkingDirectory=/var/lib/kubelet
+ExecStart=/home/node01/k8s/kubernetes/server/bin/kubelet \
+  --address=172.17.8.78 \
+  --hostname-override=172.17.8.78 \
+  # 使用pause镜像
+  --pod-infra-container-image=registry.cn-hangzhou.aliyuncs.com/imooc/pause-amd64:3.0 \
+  --kubeconfig=/etc/kubernetes/kubelet.kubeconfig \
+  --network-plugin=cni \
+  # 必须添加的参数，如果不添加,kubelet启动报错
+  --cgroup-driver=systemd \
+  --cni-conf-dir=/etc/cni/net.d \
+  --cni-bin-dir=/home/node01/k8s/kubernetes/server/bin \
+  --cluster-dns=10.68.0.2 \
+  --cluster-domain=cluster.local. \
+  --allow-privileged=true \
+  --fail-swap-on=false \
+  --logtostderr=true \
+  --v=2
+#kubelet cAdvisor 默认在所有接口监听 4194 端口的请求, 以下iptables限制内网访问
+ExecStartPost=/sbin/iptables -A INPUT -s 10.0.0.0/8 -p tcp --dport 4194 -j ACCEPT
+ExecStartPost=/sbin/iptables -A INPUT -s 172.16.0.0/12 -p tcp --dport 4194 -j ACCEPT
+ExecStartPost=/sbin/iptables -A INPUT -s 192.168.0.0/16 -p tcp --dport 4194 -j ACCEPT
+ExecStartPost=/sbin/iptables -A INPUT -p tcp --dport 4194 -j DROP
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
+```
+
+```shell
+# kubelet.kubeconfig
+apiVersion: v1
+clusters:
+- cluster:
+    insecure-skip-tls-verify: true
+    server: http://172.17.8.77:8080
+  name: kubernetes
+contexts:
+- context:
+    cluster: kubernetes
+    user: ""
+  name: system:node:kube-master
+current-context: system:node:kube-master
+kind: Config
+preferences: {}
+users: []
+```
+
+```shell
+# 10-calico.conf
+{
+    "name": "calico-k8s-network",
+    "cniVersion": "0.1.0",
+    "type": "calico",
+    "etcd_endpoints": "http://172.17.8.77:2379",
+    "log_level": "info",
+    "ipam": {
+        "type": "calico-ipam"
+    },
+    "kubernetes": {
+        "k8s_api_root": "http://172.17.8.77:8080"
+    }
+}
+
+```
+
 
 
 
