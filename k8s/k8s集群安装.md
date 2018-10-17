@@ -468,6 +468,24 @@ users: []
 
 ```
 
+# 查看k8s集群状态(安装成功)
+```shell
+[root@master k8s]# kubectl get nodes
+NAME          STATUS    ROLES     AGE       VERSION
+172.17.8.78   Ready     <none>    2h        v1.10.0
+172.17.8.79   Ready     <none>    2h        v1.10.0
+[root@node01 worker-node]# kubectl get nodes
+NAME          STATUS    ROLES     AGE       VERSION
+172.17.8.78   Ready     <none>    2h        v1.10.0
+172.17.8.79   Ready     <none>    2h        v1.10.0
+[root@node02 worker-node]# kubectl get nodes
+NAME          STATUS    ROLES     AGE       VERSION
+172.17.8.78   Ready     <none>    2h        v1.10.0
+172.17.8.79   Ready     <none>    2h        v1.10.0
+```
+
+## 遗留问题
+
 
 
 
