@@ -6,7 +6,7 @@ CentOS 7之Systemd详解之服务单元设置system.service](https://blog.csdn.n
 - 其中的参数通过对应的二进制文件的-h命令查询
 
 - centos 安装好文章
-- [在CentOS上部署kubernetes集群] (https://jimmysong.io/kubernetes-handbook/practice/install-kubernetes-on-centos.html)
+- [在CentOS上部署kubernetes集群](https://jimmysong.io/kubernetes-handbook/practice/install-kubernetes-on-centos.html)
 
 
 #  安装环境配置
