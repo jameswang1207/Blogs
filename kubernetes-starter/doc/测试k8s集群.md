@@ -124,9 +124,27 @@ ping 172.30.45.1
 - 创建 TLS Bootstrapping Token为每个kubelet分发证书而不是自己生成
 - [创建kubeconfig文件参考文档](https://jimmysong.io/kubernetes-handbook/practice/create-kubeconfig.html)
 
+### 在master节点安装的组件
+- kube-apiserver
+- kube-scheduler
+- kube-controller-manager
+- [安装详细解释](https://jimmysong.io/kubernetes-handbook/practice/master-installation.html)
 
-
-
+### 安装完后验证集群状态
+- 注意在配置api-server时，配置如下的--insecure-bind-address，如果不配置，默认是在127.0.0.1中监听
+```shell
+## The address on the local server to listen to.
+KUBE_API_ADDRESS="--advertise-address=172.17.8.82 --bind-address=172.17.8.82 --insecure-bind-address=172.17.8.82"
+```
+- 如上配置了这个参数，因此在查看集群装填时填写：--server kubectl --server 172.17.8.82:8080 get cs
+```shell
+NAME                 STATUS    MESSAGE              ERROR
+scheduler            Healthy   ok                   
+controller-manager   Healthy   ok                   
+etcd-0               Healthy   {"health": "true"}   
+etcd-2               Healthy   {"health": "true"}   
+etcd-1               Healthy   {"health": "true"}
+```
 
 
 
