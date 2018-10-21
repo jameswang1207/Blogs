@@ -23,5 +23,13 @@ yum install docker
 #修改/etc/selinux/config文件中设置SELINUX=disabled ，然后重启服务器。
 ```
 ### 部署etcd
+
 - 关闭所有etcd节点的防火墙
+```shell
+service docker start
+systemctl stop firewalld
+systemctl disable firewalld
+```
+- 部署etcd请参见
+- [etcd集群部署](https://jimmysong.io/kubernetes-handbook/practice/etcd-cluster-installation.html)
 
