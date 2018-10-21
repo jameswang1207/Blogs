@@ -145,6 +145,8 @@ etcd-0               Healthy   {"health": "true"}
 etcd-2               Healthy   {"health": "true"}   
 etcd-1               Healthy   {"health": "true"}
 ```
+### 注意在k8s中scheduler、controller-manager组件的高可用k8s已经做了：参数leader-elect，但是api-server的高可用我们应该自己做，
+
 
 
 
