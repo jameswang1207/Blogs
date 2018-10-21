@@ -44,7 +44,7 @@ journalctl -f -u etcd.service
 
 ### 部署fannel
 - [部署脚本](https://jimmysong.io/kubernetes-handbook/practice/flannel-installation.html)
-- 在etcd中创建网络配置
+- 在etcd中创建网络配置：必须配置这一个
 ```shell
 etcdctl --endpoints=https://172.17.8.82:2379,https://172.17.8.84:2379,https://172.17.8.85:2379 \
   --ca-file=/etc/kubernetes/ssl/ca.pem \
