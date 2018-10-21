@@ -37,3 +37,12 @@ systemctl disable firewalld
 - 部署etcd请参见
 - [etcd集群部署](https://jimmysong.io/kubernetes-handbook/practice/etcd-cluster-installation.html)
 
+- 查看etcd服务是否正常
+```shell
+journalctl -f -u etcd.service
+```
+
+
+
+
+
