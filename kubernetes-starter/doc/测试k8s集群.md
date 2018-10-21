@@ -43,6 +43,7 @@ journalctl -f -u etcd.service
 ```
 
 ### 部署fannel
+- [flannel原理](https://blog.csdn.net/weixin_29115985/article/details/78963125)
 - [部署脚本](https://jimmysong.io/kubernetes-handbook/practice/flannel-installation.html)
 - 在etcd中创建网络配置：必须配置这一个
 ```shell
@@ -119,6 +120,9 @@ ping 172.30.68.1
 ping 172.30.15.1
 ping 172.30.45.1
 ```
+### kubeconfig 的创建
+- 创建 TLS Bootstrapping Token为每个kubelet分发证书而不是自己生成
+- [创建kubeconfig文件参考文档](https://jimmysong.io/kubernetes-handbook/practice/create-kubeconfig.html)
 
 
 
