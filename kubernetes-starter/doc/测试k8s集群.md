@@ -22,6 +22,10 @@ yum install docker
 #永久方法 – 需要重启服务器
 #修改/etc/selinux/config文件中设置SELINUX=disabled ，然后重启服务器。
 ```
+### 创建TLS证书和秘钥
+
+- [创建TLS证书和秘钥](https://jimmysong.io/kubernetes-handbook/practice/create-tls-and-secret-key.html)
+
 ### 部署etcd
 
 - 关闭所有etcd节点的防火墙
