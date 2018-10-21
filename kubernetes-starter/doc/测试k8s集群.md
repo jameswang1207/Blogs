@@ -66,6 +66,56 @@ etcdctl --endpoints=https://172.17.8.82:2379,https://172.17.8.84:2379,https://17
   journalctl -f -u flannel.servie
 ```
 
+### docker配置文件，使得docker使用的网段与flannel在一个网段
+```shell
+vi /usr/lib/systemd/system/docker.service
+
+
+[Unit]
+Description=Docker Application Container Engine
+Documentation=http://docs.docker.com
+After=network.target
+Wants=docker-storage-setup.service
+Requires=docker-cleanup.timer
+
+[Service]
+Type=notify
+NotifyAccess=main
+EnvironmentFile=-/run/containers/registries.conf
+EnvironmentFile=-/etc/sysconfig/docker
+EnvironmentFile=-/etc/sysconfig/docker-storage
+EnvironmentFile=-/etc/sysconfig/docker-network
+# 必须追加在最后面
+EnvironmentFile=-/run/flannel/docker
+EnvironmentFile=-/run/flannel/subnet.env
+Environment=GOTRACEBACK=crash
+Environment=DOCKER_HTTP_HOST_COMPAT=1
+Environment=PATH=/usr/libexec/docker:/usr/bin:/usr/sbin
+ExecStart=/usr/bin/dockerd-current \
+          --add-runtime docker-runc=/usr/libexec/docker/docker-runc-current \
+          --default-runtime=docker-runc \
+          --exec-opt native.cgroupdriver=systemd \
+          --userland-proxy-path=/usr/libexec/docker/docker-proxy-current \
+          --init-path=/usr/libexec/docker/docker-init-current \
+          --seccomp-profile=/etc/docker/seccomp.json \
+          $OPTIONS \
+          $DOCKER_STORAGE_OPTIONS \
+          $DOCKER_NETWORK_OPTIONS \
+          $ADD_REGISTRY \
+          $BLOCK_REGISTRY \
+          $INSECURE_REGISTRY \
+          $REGISTRIES
+ExecReload=/bin/kill -s HUP $MAINPID
+LimitNOFILE=1048576
+LimitNPROC=1048576
+LimitCORE=infinity
+
+systemctl daemon-reload
+systemctl restart docker
+# 查看docker网络是否和flannel网络在一个网段
+ipaddr
+```
+
 
 
 
