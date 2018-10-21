@@ -22,4 +22,6 @@ yum install docker
 #永久方法 – 需要重启服务器
 #修改/etc/selinux/config文件中设置SELINUX=disabled ，然后重启服务器。
 ```
+### 部署etcd
+- 关闭所有etcd节点的防火墙
 
