@@ -114,6 +114,10 @@ systemctl daemon-reload
 systemctl restart docker
 # 查看docker网络是否和flannel网络在一个网段
 ipaddr
+# 检测集群中节点之间flannel网络是否通讯：ping 对方docker0网关，如果能ping通，说明正常
+ping 172.30.68.1
+ping 172.30.15.1
+ping 172.30.45.1
 ```
 
 
