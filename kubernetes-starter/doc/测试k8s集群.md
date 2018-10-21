@@ -42,6 +42,42 @@ systemctl disable firewalld
 journalctl -f -u etcd.service
 ```
 
+### 部署fannel
+- [部署脚本](https://jimmysong.io/kubernetes-handbook/practice/flannel-installation.html)
+- 在etcd中创建网络配置
+```shell
+etcdctl --endpoints=https://172.17.8.82:2379,https://172.17.8.84:2379,https://172.17.8.85:2379 \
+  --ca-file=/etc/kubernetes/ssl/ca.pem \
+  --cert-file=/etc/kubernetes/ssl/kubernetes.pem \
+  --key-file=/etc/kubernetes/ssl/kubernetes-key.pem \
+  mkdir /kube-centos/network
+etcdctl --endpoints=https://172.17.8.82:2379,https://172.17.8.84:2379,https://172.17.8.85:2379 \
+  --ca-file=/etc/kubernetes/ssl/ca.pem \
+  --cert-file=/etc/kubernetes/ssl/kubernetes.pem \
+  --key-file=/etc/kubernetes/ssl/kubernetes-key.pem \
+  mk /kube-centos/network/config '{"Network":"172.30.0.0/16","SubnetLen":24,"Backend":{"Type":"vxlan"}}'
+  
+  cp ./flannel.service /usr/lib/systemd/system/
+  systemctl daemon-reload
+  systemctl enable flannel.service
+  systemctl start flannel.service
+  systemctl status flannel.servie
+  # 查看日志方法
+  journalctl -f -u flannel.servie
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
