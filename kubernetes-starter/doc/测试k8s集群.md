@@ -136,7 +136,7 @@ ping 172.30.45.1
 ## The address on the local server to listen to.
 KUBE_API_ADDRESS="--advertise-address=172.17.8.82 --bind-address=172.17.8.82 --insecure-bind-address=172.17.8.82"
 ```
-- 如上配置了这个参数，因此在查看集群装填时填写：--server kubectl --server 172.17.8.82:8080 get cs
+- 如上配置了这个参数，因此在查看集群装填时填写： kubectl --server 172.17.8.82:8080 get cs
 ```shell
 NAME                 STATUS    MESSAGE              ERROR
 scheduler            Healthy   ok                   
@@ -152,7 +152,22 @@ etcd-1               Healthy   {"health": "true"}
 - Docker：docker 使用yum安装 
 - kubelet：直接用二进制文件安装
 - kube-proxy：直接用二进制文件安装
+- [node部署详细解析](https://jimmysong.io/kubernetes-handbook/practice/node-installation.html)
 
+- 在中必须进行角色的配置
+```shell
+cd /etc/kubernetes
+kubectl create clusterrolebinding kubelet-bootstrap \
+  --clusterrole=system:node-bootstrapper \
+  --user=kubelet-bootstrap
+  # --user=kubelet-bootstrap 是在 /etc/kubernetes/token.csv 文件中指定的用户名，同时也写入了 /etc/kubernetes/bootstrap.kubeconfig 文件；
+```
+
+- 关闭swap配置
+```shell
+# 在启动参数中添加
+--fail-swap-on=false
+```
 
 
 
