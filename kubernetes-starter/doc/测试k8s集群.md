@@ -21,4 +21,21 @@
     # 从浏览器上访问
     172.17.8.85：30487
 ```
+
+## 集群部署-WEB-UI(dashboard)
+- [阿里镜像库](https://dev.aliyun.com/search.html)
+```shell
+   # 创建dashboard
+   kubectl --server 172.17.8.82:8080 create -f dashboard-rbac.yaml
+   kubectl --server 172.17.8.82:8080 create -f dashboard-controller.yaml
+   kubectl --server 172.17.8.82:8080 create -f dashboard-service.yaml
+   # 查看部署情况
+   kubectl --server 172.17.8.82:8080 get all -n kube-system
+   # 在查询时需要指定命名空间，默认查询到的是default下的组件部署情况
+   kubectl --server 172.17.8.82:8080 get pod -n kube-system svc
+```
+
+## 通过浏览器查询部署情况
+http://172.17.8.84:30302/#!/overview?namespace=default
+
  
