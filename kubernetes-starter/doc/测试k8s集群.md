@@ -24,6 +24,7 @@
 
 ## 集群部署-WEB-UI(dashboard)
 - [阿里镜像库](https://dev.aliyun.com/search.html)
+- [相关脚本](https://github.com/jameswangAugmentum/Blogs/tree/master/kubernetes-starter/dashboard)
 ```shell
    # 创建dashboard
    kubectl --server 172.17.8.82:8080 create -f dashboard-rbac.yaml
