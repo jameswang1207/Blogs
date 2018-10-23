@@ -182,6 +182,15 @@ kubectl create clusterrolebinding kubelet-bootstrap \
    kubectl --server 172.17.8.82:8080 certificate approve 【csr的名字】
 ```
 
+### 部署成功结果
+```shell
+[root@localhost kube-apiserver]# kubectl --server 172.17.8.82:8080 get nodes
+NAME          STATUS    ROLES     AGE       VERSION
+172.17.8.84   Ready     <none>    15m       v1.10.0
+172.17.8.85   Ready     <none>    6m        v1.10.0
+```
+
+
 
 
 
