@@ -131,7 +131,7 @@ ping 172.30.45.1
 - [安装详细解释](https://jimmysong.io/kubernetes-handbook/practice/master-installation.html)
 
 ### 安装完后验证集群状态
-- 注意在配置api-server时，配置如下的--insecure-bind-address，如果不配置，默认是在127.0.0.1中监听
+- 注意在配置api-server时，配置如下的--insecure-bind-address，如果不配置，默认是在127.0.0.1中监听,在证书下发过程中需要使用该条件
 ```shell
 ## The address on the local server to listen to.
 KUBE_API_ADDRESS="--advertise-address=172.17.8.82 --bind-address=172.17.8.82 --insecure-bind-address=172.17.8.82"
@@ -168,6 +168,18 @@ kubectl create clusterrolebinding kubelet-bootstrap \
 ```shell
 # 在启动参数中添加
 --fail-swap-on=false
+```
+
+- 记录部署node过程中的血泪：
+- 在生成证书完后，需要拷贝到对应的api-server的目录下，拷贝完后需要重新启动api-server服务
+- 记录几条拍错有用的命令
+```shell
+   # 查看需要签发证书的node节点
+   kubectl --server 172.17.8.82:8080 get csr
+   # 删除需要签发的证书节点
+   kubectl --server 172.17.8.82:8080 delete csr --all
+   # 通过签发证书
+   kubectl --server 172.17.8.82:8080 certificate approve 【csr的名字】
 ```
 
 
