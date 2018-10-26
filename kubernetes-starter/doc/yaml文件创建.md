@@ -46,13 +46,16 @@
 ### 部署dns
 - dns 部署方法
 - [dns](https://jimmysong.io/kubernetes-handbook/practice/kubedns-addon-installation.html)
-- 在容器中查看dns相关信息
+
+- []
 ```shell
 kubectl --server 172.17.8.8.:8080 exec -ti busybox -- nslookup  kubernetes.default
 ```
 
 ### 检测kubedns功能
+
 ```shell
+# busybox-deploy.yaml
 apiVersion: v1
 kind: Pod
 metadata: 
@@ -60,13 +63,55 @@ metadata:
     namespace: default
 spec:
     containers:
-      - image: busybox
+      - image: registry.cn-hangzhou.aliyuncs.com/qinyujia-test/busybox:latest
         command:
           - sleep
           - "3600"
         imagePullPolicy: IfNotPresent
         name: busybox
     restartPolicy: Always
+    
+# 创建一个pod
+kubectl --server 172.17.8.82:8080 run my-nginx --image=nginx --replicas=1
+# 创建对应的service
+kubectl expose deploy my-nginx
+# 查看你的service
+[root@localhost nginx]# kubectl --server 172.17.8.82:8080 get services --all-namespaces |grep my-nginx
+default       my-nginx               ClusterIP   10.254.97.57     <none>        80/TCP          25m
+```
+
+### 测试dns是否搭建成功
+
+```shell
+kubectl --server 172.17.8.82:8080 create -f busybox-deploy.yaml
+kubectl --server 172.17.8.82:8080 exec -ti  busybox -- nslookup kubernetes.default
+# 输出结果：能解析到k8s默认的服务
+# 一：
+Server:    10.254.0.2
+Address 1: 10.254.0.2 kube-dns.kube-system.svc.cluster.local
+Name:      kubernetes.default
+Address 1: 10.254.0.1 kubernetes.default.svc.cluster.local
+
+# 二：
+[root@localhost nginx]# kubectl --server 172.17.8.82:8080 exec -ti  busybox -- nslookup my-nginx.default
+Server:    10.254.0.2
+Address 1: 10.254.0.2 kube-dns.kube-system.svc.cluster.local
+Name:      my-nginx.default
+Address 1: 10.254.97.57 my-nginx.default.svc.cluster.local
+
+# 三
+[root@localhost nginx]# kubectl --server 172.17.8.82:8080 exec -ti  busybox -- nslookup nginx.default
+Server:    10.254.0.2
+Address 1: 10.254.0.2 kube-dns.kube-system.svc.cluster.local
+Name:      nginx.default
+Address 1: 10.254.132.110 nginx.default.svc.cluster.local
+
+# 查看pod对应的service：对应响应ip
+[root@localhost nginx]# kubectl --server 172.17.8.82:8080 get services
+NAME         TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)        AGE
+kubernetes   ClusterIP   10.254.0.1       <none>        443/TCP        4d
+my-nginx     ClusterIP   10.254.97.57     <none>        80/TCP         29m
+nginx        NodePort    10.254.132.110   <none>        88:30487/TCP   2d
 ```
 
 
