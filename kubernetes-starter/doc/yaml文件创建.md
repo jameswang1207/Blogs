@@ -45,9 +45,9 @@
 
 ### 部署dns
 - dns 部署方法
-- [dns](https://jimmysong.io/kubernetes-handbook/practice/kubedns-addon-installation.html)
+- [dns部署相关文章](https://jimmysong.io/kubernetes-handbook/practice/kubedns-addon-installation.html)
 
-- []
+- [dns部署脚本](https://github.com/jameswangAugmentum/Blogs/tree/master/kubernetes-starter/kubedns)
 ```shell
 kubectl --server 172.17.8.8.:8080 exec -ti busybox -- nslookup  kubernetes.default
 ```
