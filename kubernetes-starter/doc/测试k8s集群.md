@@ -20,10 +20,34 @@
     curl 10.254.132.110：88
     # 从浏览器上访问
     172.17.8.85：30487
-```
+    # 查看全部资源运行状态
+    kubectl --server 172.17.8.82:8080 get all
+    # 查看所有标签
+    kubectl --server 172.17.8.82:8080 get pods --show-labels
+    # 应用排查故障
+    # 查看某个pod的状态
+    kubectl --server 172.17.8.82:8080 describe [pod | deploy] nginx-65899c769f-7qqxp
+    # 产看运行时的日志
+    kubectl --server 172.17.8.82:8080 logs nginx-65899c769f-7qqxp
+    # 进入容器
+    kubectl --server 172.17.8.82:8080 exec -it nginx-65899c769f-7qqxp /bin/bash
+    # 跟新你的资源限制
+    kubectl --server 172.17.8.82:8080 set image deployment/nginx nginx=nginx:1.13 --record
+    # 修改
+    kubectl --server 172.17.8.82:8080 edit deployment/nginx
+    
+    # 资源的发布管理
+    kubectl --server 172.17.8.82:8080 rollout status deploy/nginx
+    kubectl --server 172.17.8.82:8080 rollout history deploy/nginx
+    # 版本回滚
+    kubectl --server 172.17.8.82:8080 rollout undo deploy/nginx
+    # 增大pod的数量
+    kubectl --server 172.17.8.82:8080 scale deploy/nginx --replicas=5
+ ```
 
 ## 集群部署-WEB-UI(dashboard)
 - [阿里镜像库](https://dev.aliyun.com/search.html)
+- [相关脚本](https://github.com/jameswangAugmentum/Blogs/tree/master/kubernetes-starter/dashboard)
 ```shell
    # 创建dashboard
    kubectl --server 172.17.8.82:8080 create -f dashboard-rbac.yaml
