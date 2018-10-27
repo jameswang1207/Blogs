@@ -45,9 +45,9 @@
 
 ### 部署dns
 - dns 部署方法
-- [dns](https://jimmysong.io/kubernetes-handbook/practice/kubedns-addon-installation.html)
+- [dns部署相关文章](https://jimmysong.io/kubernetes-handbook/practice/kubedns-addon-installation.html)
 
-- []
+- [dns部署脚本](https://github.com/jameswangAugmentum/Blogs/tree/master/kubernetes-starter/kubedns)
 ```shell
 kubectl --server 172.17.8.8.:8080 exec -ti busybox -- nslookup  kubernetes.default
 ```
@@ -112,6 +112,22 @@ NAME         TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)        AGE
 kubernetes   ClusterIP   10.254.0.1       <none>        443/TCP        4d
 my-nginx     ClusterIP   10.254.97.57     <none>        80/TCP         29m
 nginx        NodePort    10.254.132.110   <none>        88:30487/TCP   2d
+```
+
+# 查看某个service对应的pod
+
+```shell
+[root@localhost systemd]# kubectl --server 172.17.8.82:8080 get svc
+NAME         TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)        AGE
+kubernetes   ClusterIP   10.254.0.1       <none>        443/TCP        5d
+my-nginx     ClusterIP   10.254.97.57     <none>        80/TCP         15h
+nginx        NodePort    10.254.132.110   <none>        88:30487/TCP   3d
+
+[root@localhost systemd]# kubectl --server 172.17.8.82:8080 get ep
+NAME         ENDPOINTS                       AGE
+kubernetes   172.17.8.82:6443                5d
+my-nginx     172.30.45.3:80,172.30.68.2:80   15h
+nginx        172.30.68.4:80                  3d
 ```
 
 
