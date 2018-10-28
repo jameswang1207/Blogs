@@ -24,7 +24,7 @@ spec:
           # Any image is permissible as long as:
           # 1. It serves a 404 page at /
           # 2. It serves 200 on a /healthz endpoint
-          image: registry.cn-hangzhou.aliyuncs.com/chewel_k8s/defaultbackend-amd64:1.5
+          image: registry.cn-hangzhou.aliyuncs.com/google_containers/defaultbackend:1.4
           livenessProbe:
             httpGet:
               path: /healthz

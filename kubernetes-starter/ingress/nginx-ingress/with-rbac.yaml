@@ -26,7 +26,7 @@ spec:
       hostNetwork: true
       containers:
         - name: nginx-ingress-controller
-          image: registry.cn-beijing.aliyuncs.com/k8s_apps/nginx-ingress-controller:0.14.0
+          image: lizhenliang/nginx-ingress-controller:0.9.0
           args:
             - /nginx-ingress-controller
             - --default-backend-service=$(POD_NAMESPACE)/default-http-backend
