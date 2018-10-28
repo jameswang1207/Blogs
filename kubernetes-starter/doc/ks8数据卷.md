@@ -25,6 +25,8 @@ spec:
 ```shell
    kubectl --server 172.17.8.82:8080 get describe pod xxx[podName]
 ```
+
+- nfs 配置文件 
 ```shell
 apiVersion: v1
 kind: Pod
@@ -41,5 +43,49 @@ spec:
  - name : nginx-volume
    hostPath:　
      path: /data
-     type: Directory
+     type:  
 ```
+
+### 挂载nfs
+```shell
+apiVersion: extensions/v1betal
+kind: Deployment
+metadata:
+  name: nginx-deployment
+  spec:
+    replicas: 2
+    template:
+      metadata:
+        labels:
+          app: nginx
+      spec:
+        containers:
+        - name: nginx
+          image: nginx
+          volumeMounts:
+          - mountPath: /usr/share/nginx/html
+            name: wwwroot
+          ports:
+          - containerPort: 80
+        volumes:
+        - name: wwwroot
+          nfs: 
+            server:192.168.54.xxx
+            path:/opt/wwwroot
+```
+            
+          
+          
+    
+    
+    
+    
+
+
+
+
+```
+
+
+
+
