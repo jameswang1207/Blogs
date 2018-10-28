@@ -71,9 +71,20 @@ metadata:
         - name: wwwroot
           nfs: 
             server:192.168.54.xxx
+            # 表示nfs机器上的存在的目录
             path:/opt/wwwroot
 ```
-            
+#　分部署存储的部署：gluster部署
+- [gluster部署文档](https://docs.gluster.org/en/latest/)
+- 注意事项：在创建数据卷时，我们对每个项目单独创建数据卷
+- 记住配置host文件集群中是通过名字来相互访问的
+- 在每个节点上安装他对应的客户端
+```shell
+  yum install glusterfs-fuse
+  yum install nfs-utils
+```
+# k8s支持的存储
+- [k8s支持的存储](https://kubernetes.io/docs/concepts/storage/volumes/)
           
           
     
