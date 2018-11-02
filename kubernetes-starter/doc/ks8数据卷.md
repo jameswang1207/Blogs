@@ -195,6 +195,82 @@ gluster peer probe 172.17.8.87
 # glusterFS-01：172.17.87配置集群 
 gluster peer probe 172.17.8.86 
 ```
+### Check the peer status on server1
+```shell
+# node 172.17.8.86
+[root@localhost james]# gluster peer status
+Number of Peers: 1
+Hostname: 172.17.8.87
+Uuid: 8cc1636b-f950-4dc1-9246-fed0a59f2a4f
+State: Peer in Cluster (Connected)
+
+# node 172.17.8.87
+[root@localhost james]# gluster peer status
+Number of Peers: 1
+Hostname: 172.17.8.86
+Uuid: 8cc1636b-f950-4dc1-9246-fed0a59f2a4f
+State: Peer in Cluster (Connected)
+```
+###  Set up a GlusterFS volume at : all node
+```shell
+mkdir -p /data/brick1/gv0
+gluster volume create gv0 replica 2 172.17.8.86:/data/brick1/gv0 172.17.8.87:/data/brick1/gv0 force
+[root@localhost data]# gluster volume start gv0
+volume start: gv0: success
+
+# 验证集群信息
+[root@localhost data]# gluster volume info
+Volume Name: gv0
+Type: Replicate
+Volume ID: 2a478988-f53f-401a-871f-3529cab65e48
+Status: Started
+Snapshot Count: 0
+Number of Bricks: 1 x 2 = 2
+Transport-type: tcp
+Bricks:
+Brick1: 172.17.8.86:/data/brick1/gv0
+Brick2: 172.17.8.87:/data/brick1/gv0
+Options Reconfigured:
+transport.address-family: inet
+nfs.disable: on
+performance.client-io-threads: off
+```
+
+# 在clinet上安装客户端软件：
+```shell
+# (每个node上都应安装响应的客户端)
+yum -y install glusterfs glusterfs-fuse
+# 节点挂载
+mkdir /mnt/glusterfs
+mount -t glusterfs 172.17.8.86:/gv0 /mnt/glusterfs
+# 查看挂载情况
+[root@node01 mnt]# mount -t fuse.glusterfs
+172.17.8.86:/gv0 on /mnt/glusterfs type fuse.glusterfs (rw,relatime,user_id=0,group_id=0,default_permissions,allow_other,max_read=131072)
+
+# 在k8s节点上
+[root@node01 glusterfs]# cd /mnt/glusterfs/
+[root@node01 glusterfs]# touch file1 file2 file3
+
+# 在nfs集群中常看文件node01:172.17.8.86
+drwxr-xr-x. 3 root root 17 Nov  2 03:12 brick1
+[root@localhost data]# cd /data/brick1/
+[root@localhost brick1]# ll
+total 0
+drwxr-xr-x. 3 root root 63 Nov  2 03:40 gv0
+[root@localhost brick1]# cd gv0/
+[root@localhost gv0]# ll
+total 0
+-rw-r--r--. 2 root root 0 Nov  2 03:40 file1
+-rw-r--r--. 2 root root 0 Nov  2 03:40 file2
+-rw-r--r--. 2 root root 0 Nov  2 03:40 file3
+
+# 在nfs集群中常看文件node01:172.17.8.87
+[root@localhost gv0]# ll
+total 0
+-rw-r--r--. 2 root root 0 Nov  2 03:40 file1
+-rw-r--r--. 2 root root 0 Nov  2 03:40 file2
+-rw-r--r--. 2 root root 0 Nov  2 03:40 file3
+```
 
 
 
