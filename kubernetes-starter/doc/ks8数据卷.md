@@ -173,6 +173,29 @@ spec:
 - 运维创建并维护后端存储(pv)
 - 开发者只需使用(pvc)
 
+### 安装glusterFS服务器
+- 配置两台nfs存储集群
+
+```shell
+yum install centos-release-gluster -y
+yum install glusterfs-server  glusterfs glusterfs-fuse -y
+# 关闭防火墙
+systemctl stop firewalld
+systemctl disable firewalld
+# 启动glusterFS服务：
+service glusterd start
+# 查看glusterFS服务：
+service glusterd status
+# 配置集群关联的集群ip
+```
+### Configure the trusted pool
+```shell
+# glusterFS-01：172.17.86配置集群 
+gluster peer probe 172.17.8.87
+# glusterFS-01：172.17.87配置集群 
+gluster peer probe 172.17.8.86 
+```
+
 
 
 
