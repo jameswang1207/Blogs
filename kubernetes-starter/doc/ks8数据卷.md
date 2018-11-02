@@ -174,6 +174,7 @@ spec:
 - 开发者只需使用(pvc)
 
 ### 安装glusterFS服务器
+- [glusterf安装文档](https://jimmysong.io/kubernetes-handbook/practice/using-glusterfs-for-persistent-storage.html)
 - 配置两台nfs存储集群
 
 ```shell
