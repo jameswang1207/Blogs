@@ -105,6 +105,7 @@ spec:
       # ReadWriteOnce: 谁用谁挂载
       # ReadOnlyMany: 只读挂载全部|读写挂载全部
       - ReadWriteMany
+    # pv 状态：available:可用，没有pvc绑定，bound：已经被pvc挂载，不能被别的挂载 release：需要管理员手动释放，fail失败
     # 回收策略：Retain:保留，需要管理员清楚 Recycle：自动回收 Delete
     persistentVolumeReclaimPolicy: Recycle
     nfs:
