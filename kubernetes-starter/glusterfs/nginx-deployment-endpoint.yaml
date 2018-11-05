@@ -1,0 +1,36 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: nginx-endpoint
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        service: nginx-endpoint
+    spec:
+      containers:
+      - name: nginx-endpoint
+        image: nginx:1.9
+        volumeMounts:
+        - name: glusterfsvol
+          mountPath: /usr/share/nginx/html
+        ports:
+        - containerPort: 80
+      volumes:
+      - name: glusterfsvol
+        glusterfs:
+          endpoints: glusterfs-cluster
+          path: gv0
+          readOnly: false
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-endpoint
+spec:
+  selector:
+    service: nginx-endpoint
+  ports:
+  - port: 80
+    targetPort: 80
