@@ -17,4 +17,13 @@ drwxr-xr-x. 5 root root    75 Oct 20 08:59 certs.d
 kubectl --server 172.17.8.82:8080 create secret docker-registry  regsecret --docker-server=192.168.54.xx：8082 --docker-username=admin --docker-password=123456 --docker-email=xxxx@qq.com --namespace=xxx
 # 在对应的pod上添加相应的key
 ```
+# k8s中注意的问题
+- k8s中一个pv只能给一个pvc使用
+- pv pvc endpoint 在不同的namespace中他们是不能共享的，因此，在不同的namespace中申明自己的pv pvc endpoint
+- 在远程存储上需要将自己的每个存储有都必须开启
+```shell
+gluster volume start gv0
+gluster volume start gv1
+gluster volume start gv2
+```
 
