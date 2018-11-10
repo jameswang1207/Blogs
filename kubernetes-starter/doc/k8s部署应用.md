@@ -26,4 +26,6 @@ gluster volume start gv0
 gluster volume start gv1
 gluster volume start gv2
 ```
+# 部署时出现的问题
+- 部署在k8s中的应用的相应速度慢（验证是否和cpu或内存分配上的问题）
 
