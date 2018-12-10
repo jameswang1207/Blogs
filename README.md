@@ -93,6 +93,8 @@
 - [sharding-sphere](https://github.com/sharding-sphere/sharding-sphere)
 - [java8](https://github.com/winterbe/java8-tutorial)
 - [360k8s界面管理](https://github.com/Qihoo360/wayne)
+- [beego](https://github.com/astaxie/beego)
+- [beego中文](https://beego.me/docs/intro/)
 
 
 
