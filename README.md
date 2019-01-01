@@ -2,6 +2,7 @@
 * 重要<br/>
 <a href="https://github.com/sindresorhus/awesome">技术栈</a><br/>
 - [java Read document](https://www.jb51.net/article/90966.htm)
+- [Running Setup Data on Startup in Spring](https://www.baeldung.com/running-setup-logic-on-startup-in-spring)
 
 * 数据库先关<br/>
 <a href="https://github.com/digoal/blog">postgresql</a><br/>
