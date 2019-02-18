@@ -1,10 +1,21 @@
 ## k8s 配置证书认证、etcd集群、master高可用
 
-### linxu配置免密登录
+### 前提准备
 
 ```shell
+# 免密登录
 ssh-keygen
- ssh-copy-id  root@172.17.8.85
+ssh-copy-id  root@172.17.8.85
+```
+
+```shell
+# 安装防火墙
+yum install firewalld
+```
+
+```shell
+# 安装网络插件
+yum install net-tools
 ```
 
 ### 准备前的工作
