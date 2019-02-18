@@ -2,6 +2,8 @@
 
 ### 前提准备
 
+- 开放外网
+
 ```shell
 # 免密登录
 ssh-keygen
@@ -14,7 +16,7 @@ yum install firewalld
 ```
 
 ```shell
-# 安装网络插件
+# 安装网络工具
 yum install net-tools
 ```
 
