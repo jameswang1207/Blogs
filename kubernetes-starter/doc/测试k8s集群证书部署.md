@@ -2,7 +2,7 @@
 
 ### 前提准备
 
-- 开放外网
+- 开放外网安装最新版本的k8s
 
 ```shell
 # 免密登录
@@ -30,7 +30,13 @@ node：172.17.8.84、172.17.8.85
 ```
 ### 开始部署
 ```shell
-yum install docker
+# 安装docker
+ yum install yum-utils device-mapper-persistent-data lvm2
+ yum-config-manager \
+    --add-repo \
+    https://download.docker.com/linux/centos/docker-ce.repo
+ yum update && yum install docker-ce-18.06.2.ce
+
 #关闭所有节点的SELinux
 #永久方法 – 需要重启服务器
 #修改/etc/selinux/config文件中设置SELINUX=disabled ，然后重启服务器。
