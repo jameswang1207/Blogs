@@ -48,6 +48,8 @@ node：172.17.8.84、172.17.8.85
 ### 部署etcd
 
 - 关闭所有etcd节点的防火墙
+- ectd下载地址 https://github.com/etcd-io/etcd/releases 
+
 ```shell
 service docker start
 systemctl stop firewalld
