@@ -65,6 +65,7 @@ journalctl -f -u etcd.service
 
 ### 部署fannel
 - [flannel原理](https://blog.csdn.net/weixin_29115985/article/details/78963125)
+- [flannel下载] https://github.com/coreos/flannel/releases
 - [部署脚本](https://jimmysong.io/kubernetes-handbook/practice/flannel-installation.html)
 - 在etcd中创建网络配置：必须配置这一个
 ```shell
