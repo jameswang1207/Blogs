@@ -63,6 +63,9 @@ systemctl disable firewalld
 journalctl -f -u etcd.service
 ```
 
+- 问题在创建etcd集群中的第一个节点时，进程卡住，直接结束进程
+- 不要忘记创建etcd.service中的数据存储目录
+
 ### 部署fannel
 - [flannel原理](https://blog.csdn.net/weixin_29115985/article/details/78963125)
 - [flannel下载] https://github.com/coreos/flannel/releases
