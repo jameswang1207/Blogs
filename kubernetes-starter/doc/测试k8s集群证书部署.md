@@ -36,11 +36,18 @@ node：172.17.8.84、172.17.8.85
     --add-repo \
     https://download.docker.com/linux/centos/docker-ce.repo
  yum update && yum install docker-ce-18.06.2.ce
-
+ 
 #关闭所有节点的SELinux
 #永久方法 – 需要重启服务器
 #修改/etc/selinux/config文件中设置SELINUX=disabled ，然后重启服务器。
 ```
+
+卸载
+1.查询安装过的包
+yum list installed | grep docker
+docker-engine.x86_64                 17.03.0.ce-1.el7.centos         @dockerrepo
+2.删除安装的软件包
+yum -y remove docker-engine.x86_64
 ### 创建TLS证书和秘钥
 
 - [创建TLS证书和秘钥](https://jimmysong.io/kubernetes-handbook/practice/create-tls-and-secret-key.html)
