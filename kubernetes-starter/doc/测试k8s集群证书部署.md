@@ -65,6 +65,10 @@ journalctl -f -u etcd.service
 
 - 问题在创建etcd集群中的第一个节点时，进程卡住，直接结束进程
 - 不要忘记创建etcd.service中的数据存储目录
+- 检测etcd是否生效
+```shell
+./etcdctl   --ca-file=/etc/kubernetes/ssl/ca.pem   --cert-file=/etc/kubernetes/ssl/kubernetes.pem   --key-file=/etc/kubernetes/ssl/kubernetes-key.pem   cluster-health
+```
 
 ### 部署fannel
 - [flannel原理](https://blog.csdn.net/weixin_29115985/article/details/78963125)
