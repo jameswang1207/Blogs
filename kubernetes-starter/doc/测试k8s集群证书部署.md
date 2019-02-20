@@ -3,9 +3,12 @@
 ### 前提准备
 
 - 开放外网安装最新版本的k8s
+- Linux内核3.10.0 及以上
+- docker版本1.13.1
+- 检查cpu、内核、磁盘
 
 ```shell
-# 免密登录
+# 免密登录,配置一个master节点到其他几个节点的免密登录，方便拷贝文件
 ssh-keygen
 ssh-copy-id  root@172.17.8.85
 ```
@@ -13,6 +16,9 @@ ssh-copy-id  root@172.17.8.85
 ```shell
 # 安装防火墙
 yum install firewalld
+# 关闭防火墙
+systemctl stop firewalld
+systemctl disable firewalld
 ```
 
 ```shell
@@ -23,20 +29,14 @@ yum install net-tools
 ### 准备前的工作
 
 ```shell
-# 操作节点
-master01：172.17.8.82 
-master02：172.17.8.83
-node：172.17.8.84、172.17.8.85
+# 准备机器
+1台master
+3台node
 ```
 ### 开始部署
 ```shell
 # 安装docker
- yum install yum-utils device-mapper-persistent-data lvm2
- yum-config-manager \
-    --add-repo \
-    https://download.docker.com/linux/centos/docker-ce.repo
- yum update && yum install docker-ce-18.06.2.ce
- 
+yum update && yum install docker
 #关闭所有节点的SELinux
 #永久方法 – 需要重启服务器
 #修改/etc/selinux/config文件中设置SELINUX=disabled ，然后重启服务器。
@@ -48,12 +48,11 @@ yum list installed | grep docker
 docker-engine.x86_64                 17.03.0.ce-1.el7.centos         @dockerrepo
 2.删除安装的软件包
 yum -y remove docker-engine.x86_64
-### 创建TLS证书和秘钥
 
+### 创建TLS证书和秘钥
 - [创建TLS证书和秘钥](https://jimmysong.io/kubernetes-handbook/practice/create-tls-and-secret-key.html)
 
 ### 部署etcd
-
 - 关闭所有etcd节点的防火墙
 - ectd下载地址 https://github.com/etcd-io/etcd/releases 
 
