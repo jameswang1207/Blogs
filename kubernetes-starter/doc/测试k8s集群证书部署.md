@@ -225,6 +225,11 @@ NAME          STATUS    ROLES     AGE       VERSION
 172.17.8.85   Ready     <none>    6m        v1.10.0
 ```
 
+### k8sDashboard
+```shell
+kubectl --server 172.17.8.125:8080 describe secret $(kubectl -n  kube-system get secret | grep admin-user | awk '{print $1}')
+```
+
 
 
 
