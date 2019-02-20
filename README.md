@@ -98,6 +98,7 @@
 - [beego](https://github.com/astaxie/beego)
 - [beego中文](https://beego.me/docs/intro/)
 - [kuberbetes 二进制安装](https://github.com/yonyoucloud/install_k8s)
+- [使用kubeadm部署k8s](https://github.com/cookcodeblog/k8s-deploy)
 
 * spring  boot<br/>
 <a href="https://blog.csdn.net/dyc87112/article/details/54866244/">spring boot 动态设置日志</a><br/>
