@@ -230,6 +230,14 @@ NAME          STATUS    ROLES     AGE       VERSION
 kubectl --server 172.17.8.125:8080 describe secret $(kubectl -n  kube-system get secret | grep admin-user | awk '{print $1}')
 ```
 
+### Linux适用命令记录
+```shell
+# 把etcd.conf中的172.17.8.125换成10.12.1.35
+sed -i "s/172.17.8.125/10.12.1.35/g"  etcd.conf
+
+
+```
+
 
 
 
