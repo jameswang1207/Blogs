@@ -235,7 +235,8 @@ kubectl --server 172.17.8.125:8080 describe secret $(kubectl -n  kube-system get
 # 把etcd.conf中的172.17.8.125换成10.12.1.35
 sed -i "s/172.17.8.125/10.12.1.35/g"  etcd.conf
 
-
+# 查看当前机器上的进程
+pstree -l
 ```
 
 
