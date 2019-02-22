@@ -238,6 +238,9 @@ sed -i "s/172.17.8.125/10.12.1.35/g"  etcd.conf
 # 查看当前机器上的进程
 pstree -l
 ```
+### chrome修改https可访问
+
+"C:\Program Files (x86)\Google\Chrome\Application\chrome.exe" --test-type --ignore-certificate-errors
 
 
 
