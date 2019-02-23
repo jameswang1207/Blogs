@@ -188,6 +188,7 @@ etcd-1               Healthy   {"health": "true"}
 - kubelet：直接用二进制文件安装
 - kube-proxy：直接用二进制文件安装
 - [node部署详细解析](https://jimmysong.io/kubernetes-handbook/practice/node-installation.html)
+- 需要yum install -y conntrack-tools工具，在node kube-proxy上出现问题
 
 - 在中必须进行角色的配置
 ```shell
