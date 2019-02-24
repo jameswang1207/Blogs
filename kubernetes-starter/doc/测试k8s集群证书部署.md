@@ -156,6 +156,7 @@ ping 172.30.15.1
 ping 172.30.45.1
 ```
 ### kubeconfig 的创建
+- 先安装[安装kubectl命令行工具](https://jimmysong.io/kubernetes-handbook/practice/create-kubeconfig.html)
 - 创建 TLS Bootstrapping Token为每个kubelet分发证书而不是自己生成
 - [创建kubeconfig文件参考文档](https://jimmysong.io/kubernetes-handbook/practice/create-kubeconfig.html)
 
