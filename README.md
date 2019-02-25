@@ -97,7 +97,7 @@
 - [360k8s界面管理](https://github.com/Qihoo360/wayne)
 - [beego](https://github.com/astaxie/beego)
 - [beego中文](https://beego.me/docs/intro/)
-- [kuberbetes 二进制安装](https://github.com/yonyoucloud/install_k8s)
+- [kuberbetes 二进制安装](https://github.com/gjmzj/kubeasz)
 - [使用kubeadm部署k8s](https://github.com/cookcodeblog/k8s-deploy)
 - [使用kubeadm创建集群](https://github.com/HikoQiu/kubeadm-install-k8s)
 
