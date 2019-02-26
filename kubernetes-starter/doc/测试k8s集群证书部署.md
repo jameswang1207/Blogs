@@ -282,6 +282,9 @@ cfssl gencert -ca=ca.pem -ca-key=ca-key.pem -config=ca-config.json -profile=kube
 cp  metrics-server*.pem /etc/kubenetes/ssl
 ```
 - 部署 metrics-server yaml文件
+- 部署成功后需要重启的组件
+- master节点（三大组件+kube-proxy）
+- node 节点上的kube-proxy
 
 
 
