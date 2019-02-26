@@ -244,6 +244,43 @@ pstree -l
 
 "C:\Program Files (x86)\Google\Chrome\Application\chrome.exe" --test-type --ignore-certificate-errors
 
+### k8s集群中实现hpa
+- 创建 metrics-server 证书签名请求
+
+```json
+cat > metrics-server-csr.json <<EOF
+{
+  "CN": "aggregator",
+  "hosts": [],
+  "key": {
+    "algo": "rsa",
+    "size": 2048
+  },
+  "names": [
+    {
+      "C": "CN",
+      "ST": "BeiJing",
+      "L": "BeiJing",
+      "O": "k8s",
+      "OU": "System"
+    }
+  ]
+}
+EOF
+```
+- 生成响应的证书文件
+
+```shell
+cd /root/ssl
+cfssl gencert -ca=ca.pem -ca-key=ca-key.pem -config=ca-config.json -profile=kubernetes metrics-server-csr.json | cfssljson -bare metrics-server-csr
+```
+
+- 将文件拷贝到master对应目录中
+```shell
+cp  metrics-server*.pem /etc/kubenetes/ssl
+```
+- 部署 metrics-server yaml文件
+
 
 
 
