@@ -274,7 +274,7 @@ EOF
 
 ```shell
 cd /root/ssl
-cfssl gencert -ca=ca.pem -ca-key=ca-key.pem -config=ca-config.json -profile=kubernetes metrics-server-csr.json | cfssljson -bare metrics-server-csr
+cfssl gencert -ca=ca.pem -ca-key=ca-key.pem -config=ca-config.json -profile=kubernetes metrics-server-csr.json | cfssljson -bare metrics-server
 ```
 
 - 将文件拷贝到master对应目录中
