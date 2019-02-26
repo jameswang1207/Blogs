@@ -246,6 +246,8 @@ pstree -l
 
 ### k8s集群中实现hpa
 - 创建 metrics-server 证书签名请求
+- master 节点安装flannel网络
+- master 节点安装kube-proxy
 
 ```json
 cat > metrics-server-csr.json <<EOF
