@@ -100,6 +100,7 @@
 - [kuberbetes 二进制安装](https://github.com/gjmzj/kubeasz)
 - [使用kubeadm部署k8s](https://github.com/cookcodeblog/k8s-deploy)
 - [使用kubeadm创建集群](https://github.com/HikoQiu/kubeadm-install-k8s)
+- [k8s相关内容](https://github.com/opsnull)
 
 * spring  boot<br/>
 <a href="https://blog.csdn.net/dyc87112/article/details/54866244/">spring boot 动态设置日志</a><br/>
