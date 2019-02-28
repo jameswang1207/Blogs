@@ -286,6 +286,12 @@ cp  metrics-server*.pem /etc/kubenetes/ssl
 - master节点（三大组件+kube-proxy）
 - node 节点上的kube-proxy
 
+## k8s pod访问不了自己的网络
+-  开启docker网络混淆模式
+```shell
+ip link set docker0  promisc on
+```
+
 
 
 
