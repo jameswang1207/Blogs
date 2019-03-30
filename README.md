@@ -105,6 +105,8 @@
 * spring  boot<br/>
 <a href="https://blog.csdn.net/dyc87112/article/details/54866244/">spring boot 动态设置日志</a><br/>
 <a href="https://blog.csdn.net/u014696837/article/details/80083508">spring boot resttemplate不能发送</a><br/>
+<a href="https://blog.csdn.net/willinge/article/details/79928726">linux配置ntp服务</a><br/>
+
 
 
 
