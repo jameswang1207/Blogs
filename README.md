@@ -101,11 +101,13 @@
 - [使用kubeadm部署k8s](https://github.com/cookcodeblog/k8s-deploy)
 - [使用kubeadm创建集群](https://github.com/HikoQiu/kubeadm-install-k8s)
 - [k8s相关内容](https://github.com/opsnull)
+- [java诊断工具](https://github.com/alibaba/arthas)
 
 * spring  boot<br/>
 <a href="https://blog.csdn.net/dyc87112/article/details/54866244/">spring boot 动态设置日志</a><br/>
 <a href="https://blog.csdn.net/u014696837/article/details/80083508">spring boot resttemplate不能发送</a><br/>
 <a href="https://blog.csdn.net/willinge/article/details/79928726">linux配置ntp服务</a><br/>
+
 
 
 
