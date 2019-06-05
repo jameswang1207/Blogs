@@ -11,3 +11,7 @@ open -n /Applications/Google\ Chrome.app/ --args --disable-web-security  --user-
 ```shell
 https://blog.csdn.net/zhw0596/article/details/81394870
 ```
+##  linux 
+```shell
+ netstat -tunlp | grep 9001
+```
