@@ -60,25 +60,6 @@
 }
 ```
 
-
-# Get user information
-
-- 通过学号或工号或身份证号查询用户信息
-- Request Method:
-POST
-
-- Request url:
-http://{server-domain}/api/identify/getuser
-
-- Request Parameters:
-
-| Name | Type | Required | Example |
-| ---- | ---- | -------- | ------- |
-| userid | string | YES | 学号、工号、身份证号|
-
-- OK response body
-```
-
 ```
 # Get token
 - 统一身份平台(域名有学校提供)
@@ -97,7 +78,7 @@ http://{server-domain}/api/identify/getuser
 }
 ```
 
-# Display user image
+# Display user image（回显用户照片）
 - 域名为人脸服务域名或ip
 - url: /group1/M00/00/02/rB8YPF0ZyfOAXEgFAAC2p-Q3Nlw565.jpg?token=xxxx
 - method: get
@@ -114,3 +95,176 @@ http://{server-domain}/api/identify/getuser
  "message": "Precondition Failed"
 }
 ```
+
+#  One To N authentication(人脸1:n认证)
+- url: /faceid/api/auth/search?token=xxxx
+- method: post
+- header: Content-Type: application/json
+- parmeters
+
+| image | feature | appId |
+|------|----------|------------|
+| 图片base64 | 特征值，如果有图片就不用上传特征值 | 应用厂商后端appid |
+
+-  response
+```json
+{
+  "code": 200,
+  "message": "OK",
+  "data":{
+    "userId": "20121016",
+    "image": "/group1/M00/00/02/xxx.jpg",
+    "score": 0.4596883
+  }
+}
+```
+
+# 人脸上传对比1:N
+- url: /faceid/api/auth/upload/search?token=xxxx
+- method: post
+- header:  Content-Type: multipart/form-data
+- parmeters: 注意这是from提交
+
+| file | appId |
+|------|----------|
+| 文件 | 应用厂商后端appid |
+
+- response
+```json
+{
+  "code": 200,
+  "message": "OK",
+  "data":{
+    "userId": "20121004",
+    "image": "/group1/M00/00/02/xxxxxjpg",
+    "score": 0.99885213
+  }
+}
+```
+
+# 人脸比对1:1
+- url：/faceid/api/auth/upload/compare?token=xxxx
+- method: post
+- header: Content-Type: application/json
+- parmeters: 参数组合说明: imageA | imageB , imageA | featureB, imageA | featureB, featureA | featureB 
+
+| appId | imageA | imageB | featureA | featureB |
+|-------|--------|--------|----------|----------|
+| 应用厂商后端appid | 图片A | 图片B | 图片A的特征值 | 图片B的特征值 |
+
+- response:
+
+```json
+{
+  "code": 200,
+  "message": "OK",
+  "data":{
+  "score": 0.3272
+  }
+}
+```
+
+# 上传两张图片做比较1:1
+- url：/faceid/api/auth/upload/compare?token=xxxx
+- method: post
+- header: Content-Type: multipart/form-data
+
+- parmeters:
+
+| appId | imageA | imageB |
+|-------|--------|--------|
+| 应用厂商后端appid | 图片A |图片B|
+
+- response:
+```json
+{
+    "code": 200,
+    "message": "OK",
+    "data":{
+        "score": 0.3775
+    }
+}
+```
+
+#  用户上传照片照片base64
+- url：faceid/api/face/image?token=xxx
+- method: post
+- header: Content-Type: application/json
+- parmeters:
+
+| userId | image | type |
+|-------|--------|--------|
+| 用户工号 | 用户照片base64 | 01 |
+
+
+- response：
+```json
+{
+    "code": 200,
+    "message": "OK",
+    "data": true
+}
+```
+
+# 用户上传照片
+- url：/faceid/api/face/upload?token=xxxx
+- method: post
+- header: Content-Type: multipart/form-data
+- parmeters:
+
+| userId | file | type |
+|-------|--------|--------|
+| 用户工号 | 照片后缀为用户id | 01 |
+
+### response：
+```json
+{
+    "code": 200,
+    "message": "OK",
+    "data": true
+}
+```
+
+# 分页查询用户特征值
+- url: /faceid/api/face/findUserFace?token=xx
+- method: post
+- header: header: Content-Type: application/json
+- paramter:
+
+| appId | currentPage | pageSize | timeStamp |
+|-------| ----------- | -------- | --------- |
+| 应用厂商前端id | 当前页 | 每页多少条 | 如果传输是增量获取， 不传输，全量获取, 是上一次该数据的时间戳 |
+
+### response
+```json
+{
+  "code": 200,
+  "message": "OK",
+  "data":{
+  "pageSize": 1, // 每页多少条
+  "pageNum": 1, //当前第几页
+  "totalAmount": 22, //总条数
+  "results":[
+    {
+      "userId": "20121013", // 用户id
+      "imageUrl": "/group1/M00/00/01/rB8YPF0ZyfKAbW0qAAA9ACU3I1M261.jpg",
+      "timeStamp": 1561972900364, // 时间戳
+      "deleted": false, // 是否被删除
+      "images":
+      [
+        { 
+          "type": "01", // 照片类型，正面照
+          "feature": "xxx" // 特征值
+        }
+      ]
+    }
+  ]
+}
+```
+
+
+
+
+
+
+
