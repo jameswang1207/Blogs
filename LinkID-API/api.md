@@ -60,7 +60,6 @@
 }
 ```
 
-```
 # Get token
 - 统一身份平台(域名有学校提供)
 - url: /oauth2.0/accessToken?grant_type=client_credentials&client_id=xx&client_secret=xxx
