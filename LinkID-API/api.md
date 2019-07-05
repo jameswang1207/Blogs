@@ -186,6 +186,58 @@
 }
 ```
 
+
+# 实现人证1:1
+- url：/faceid/api/auth/compare/upload/userId?token=xxxx
+- method: post
+- header: Content-Type: multipart/form-data
+
+- parmeters:
+
+| appId | userId | imgB |
+|-------|--------|--------|
+| 应用厂商后端appid | 用户userId |图片B|
+
+- response:
+```json
+{
+"code": 200,
+"message": "OK",
+    "data":{
+        "userId": "19891063",
+        "image": "/group1/M00/00/02/rB8YPF0dyc2AS_gEAAB0fgS4DWY972.jpg",
+        "score": 0.3451
+    }
+}
+```
+
+
+
+# 实现人证1:1
+- url：faceid/api/auth/compare/userId?token=xxxx
+- method: post
+- header: Content-Type: application/json
+
+- parmeters:
+
+| appId | userId | featureB | imgB |
+|-------|--------|--------|
+| 应用厂商后端appid | 用户userId | 图片B特征值 | 照片Bbase64 |
+
+- response:
+```json
+{
+"code": 200,
+"message": "OK",
+    "data":{
+        "userId": "19891063",
+        "image": "/group1/M00/00/02/rB8YPF0dyc2AS_gEAAB0fgS4DWY972.jpg",
+        "score": 0.3451
+    }
+}
+```
+
+
 #  用户上传照片照片base64
 - url：faceid/api/face/image?token=xxx
 - method: post
@@ -200,9 +252,12 @@
 - response：
 ```json
 {
-    "code": 200,
-    "message": "OK",
-    "data": true
+"code": 200,
+"message": "OK",
+    "data":{
+        "userId": "20121014",
+        "path": "/group1/M00/00/02/rB8YPF0d-kaAPTeJAAH06y22rDA676.jpg"
+    }
 }
 ```
 
@@ -216,12 +271,15 @@
 |-------|--------|--------|
 | 用户工号 | 照片后缀为用户id | 01 |
 
-### response：
+- response：
 ```json
 {
-    "code": 200,
-    "message": "OK",
-    "data": true
+"code": 200,
+"message": "OK",
+    "data":{
+        "userId": "20121014",
+        "path": "/group1/M00/00/02/rB8YPF0d-kaAPTeJAAH06y22rDA676.jpg"
+    }
 }
 ```
 
@@ -261,6 +319,51 @@
   ]
 }
 ```
+
+# 获取照片质量
+- url: /faceid/api/face/upload/quality?token=xx
+- method: post
+- header: header: multipart/form-data
+- paramter:
+
+| appId | file |
+|-------| ----------- |
+| 应用厂商前端id | 照片 |
+
+### response
+```json
+{
+"code": 200,
+"message": "OK",
+    "data":{
+        "qualityScores": "xxx ", 质量分数
+        "feature": “特征值”
+    }
+}
+```
+
+# 获取照片质量
+- url: faceid/api/face/quality?token=xx
+- method: post
+- header: header: application/json
+- paramter:
+
+| appId | image |
+|-------| ----------- |
+| 应用厂商前端id | 照片质量base64 |
+
+### response
+```json
+{
+"code": 200,
+"message": "OK",
+    "data":{
+        "qualityScores": "xxx ", 质量分数
+        "feature": “特征值”
+    }
+}
+```
+
 
 
 
