@@ -8,20 +8,6 @@
 | 10001 | No user found for conditions | No user found for user query condition. |
 | 10002 | No apps found for conditions | No apps found for apps query condition. |
 
-# Response type
-
-## OK response body
-```
-{
-    "code": "200",
-    "message": "OK",
-    "data": {
-        "name": "姓名",
-        "nikename":"昵称"
-    }
-}
-```
-
 ## No content response body (No content for query/search request)
 
 ```
@@ -96,7 +82,7 @@
 ```
 
 #  One To N authentication(人脸1:n认证)
-- url: /faceid/api/auth/search?token=xxxx
+- url: /faceid/public/auth/search?token=xxxx
 - method: post
 - header: Content-Type: application/json
 - parmeters
@@ -118,31 +104,8 @@
 }
 ```
 
-# 人脸上传对比1:N
-- url: /faceid/api/auth/upload/search?token=xxxx
-- method: post
-- header:  Content-Type: multipart/form-data
-- parmeters: 注意这是from提交
-
-| file | appId |
-|------|----------|
-| 文件 | 应用厂商后端appid |
-
-- response
-```json
-{
-  "code": 200,
-  "message": "OK",
-  "data":{
-    "userId": "20121004",
-    "image": "/group1/M00/00/02/xxxxxjpg",
-    "score": 0.99885213
-  }
-}
-```
-
 # 人脸比对1:1
-- url：/faceid/api/auth/upload/compare?token=xxxx
+- url：/faceid/public/auth/upload/compare?token=xxxx
 - method: post
 - header: Content-Type: application/json
 - parmeters: 参数组合说明: imageA | imageB , imageA | featureB, imageA | featureB, featureA | featureB 
@@ -185,7 +148,6 @@
 }
 ```
 
-
 # 实现人证1:1
 - url：/faceid/api/auth/compare/upload/userId?token=xxxx
 - method: post
@@ -209,8 +171,6 @@
     }
 }
 ```
-
-
 
 # 实现人证1:1
 - url：faceid/api/auth/compare/userId?token=xxxx
@@ -236,39 +196,16 @@
 }
 ```
 
-
 #  用户上传照片照片base64
-- url：faceid/api/face/image?token=xxx
+- url：faceid/public/face/image?token=xxx
 - method: post
 - header: Content-Type: application/json
 - parmeters:
 
-| userId | image | type |
-|-------|--------|--------|
-| 用户工号 | 用户照片base64 | 01 |
+| userId | image | type | ext|
+|-------|--------|--------|--------|
+| 用户工号 | 用户照片base64 | 01 | jpg，bmp，png|
 
-
-- response：
-```json
-{
-"code": 200,
-"message": "OK",
-    "data":{
-        "userId": "20121014",
-        "path": "/group1/M00/00/02/rB8YPF0d-kaAPTeJAAH06y22rDA676.jpg"
-    }
-}
-```
-
-# 用户上传照片
-- url：/faceid/api/face/upload?token=xxxx
-- method: post
-- header: Content-Type: multipart/form-data
-- parmeters:
-
-| userId | file | type |
-|-------|--------|--------|
-| 用户工号 | 照片后缀为用户id | 01 |
 
 - response：
 ```json
@@ -320,29 +257,7 @@
 ```
 
 # 获取照片质量
-- url: /faceid/api/face/upload/quality?token=xx
-- method: post
-- header: header: multipart/form-data
-- paramter:
-
-| appId | file |
-|-------| ----------- |
-| 应用厂商前端id | 照片 |
-
-### response
-```json
-{
-"code": 200,
-"message": "OK",
-    "data":{
-        "qualityScores": "xxx ", 质量分数
-        "feature": “特征值”
-    }
-}
-```
-
-# 获取照片质量
-- url: faceid/api/face/quality?token=xx
+- url: faceid/public/face/quality?token=xx
 - method: post
 - header: header: application/json
 - paramter:
