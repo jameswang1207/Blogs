@@ -96,84 +96,20 @@
 {
   "code": 200,
   "message": "OK",
-  "data":{
-    "userId": "20121016",
-    "image": "/group1/M00/00/02/xxx.jpg",
-    "score": 0.4596883
-  }
-}
-```
-
-# 人脸比对1:1
-- url：/faceid/public/auth/upload/compare?token=xxxx
-- method: post
-- header: Content-Type: application/json
-- parmeters: 参数组合说明: imageA | imageB , imageA | featureB, imageA | featureB, featureA | featureB 
-
-| appId | imageA | imageB | featureA | featureB |
-|-------|--------|--------|----------|----------|
-| 应用厂商后端appid | 图片A | 图片B | 图片A的特征值 | 图片B的特征值 |
-
-- response:
-
-```json
-{
-  "code": 200,
-  "message": "OK",
-  "data":{
-  "score": 0.3272
-  }
-}
-```
-
-# 上传两张图片做比较1:1
-- url：/faceid/api/auth/upload/compare?token=xxxx
-- method: post
-- header: Content-Type: multipart/form-data
-
-- parmeters:
-
-| appId | imageA | imageB |
-|-------|--------|--------|
-| 应用厂商后端appid | 图片A |图片B|
-
-- response:
-```json
-{
-    "code": 200,
-    "message": "OK",
-    "data":{
-        "score": 0.3775
-    }
+  "data":
+        {
+        "userId": "20021010",
+        "image": "/group1/M00/00/07/rB8YPF0lPJKAEo1aAADziytjPhY542.jpg",
+        "score": 0.1774,
+        "appScore": null,
+        "hasPass": null,
+        "hasPermission": null
+        }
 }
 ```
 
 # 实现人证1:1
-- url：/faceid/api/auth/compare/upload/userId?token=xxxx
-- method: post
-- header: Content-Type: multipart/form-data
-
-- parmeters:
-
-| appId | userId | imgB |
-|-------|--------|--------|
-| 应用厂商后端appid | 用户userId |图片B|
-
-- response:
-```json
-{
-"code": 200,
-"message": "OK",
-    "data":{
-        "userId": "19891063",
-        "image": "/group1/M00/00/02/rB8YPF0dyc2AS_gEAAB0fgS4DWY972.jpg",
-        "score": 0.3451
-    }
-}
-```
-
-# 实现人证1:1
-- url：faceid/api/auth/compare/userId?token=xxxx
+- url：faceid/public/auth/compare/userId?token=xxxx
 - method: post
 - header: Content-Type: application/json
 
@@ -188,11 +124,15 @@
 {
 "code": 200,
 "message": "OK",
-    "data":{
-        "userId": "19891063",
-        "image": "/group1/M00/00/02/rB8YPF0dyc2AS_gEAAB0fgS4DWY972.jpg",
-        "score": 0.3451
-    }
+"data":
+        {
+        "userId": "20021010",
+        "image": "/group1/M00/00/07/rB8YPF0lPJKAEo1aAADziytjPhY542.jpg",
+        "score": 0.1774,
+        "appScore": null,
+        "hasPass": null,
+        "hasPermission": null
+        }
 }
 ```
 
@@ -220,7 +160,7 @@
 ```
 
 # 分页查询用户特征值
-- url: /faceid/api/face/findUserFace?token=xx
+- url: /faceid/public/face/findUserFace?token=xx
 - method: post
 - header: header: Content-Type: application/json
 - paramter:
