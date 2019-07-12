@@ -116,7 +116,7 @@
 - parmeters:
 
 | appId | userId | featureB | imgB |
-|-------|--------|--------|
+|-------|--------|--------|--------|
 | 应用厂商后端appid | 用户userId | 图片B特征值 | 照片Bbase64 |
 
 - response:
