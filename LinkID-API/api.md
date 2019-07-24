@@ -218,6 +218,36 @@
 }
 ```
 
+# 通过用户id及照片类型获取照片
+- url：/faceid/api/face/searchFaceByUserIdAndType?token=xxxx
+- method: post
+- header: application/json
+- parameter:
+| userId | type |
+|------- |-------|
+| 用户工号或学号 | 照片类型|
+
+- response 
+
+```json
+# success
+{
+  "code": 200,
+  "message": "OK",
+  "data": {
+    "userId": "20121018",
+    "path": "/group1/M00/00/06/rBEIsl0u4syAdQ6PAAFNi7rfTXI583.jpg"
+  }
+}
+
+# fail
+{
+  "code": 204,
+  "message": "No Content",
+  "data": null
+}
+
+```
 
 
 
