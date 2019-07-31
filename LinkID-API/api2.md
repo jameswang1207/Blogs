@@ -244,8 +244,9 @@
 - method: post
 - header: application/json
 - parameter:
+
 | userId | type |
-|------- |-------|
+|------- |------|
 | 用户工号或学号 | 照片类型|
 
 - response 
