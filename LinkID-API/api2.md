@@ -64,82 +64,92 @@
 ```
 
 
-# Display user image（回显用户照片）
+# Display user image（回显用户照片）--- 三方应用回显照片
+- 管理端回显照片使用,在返回的URL中加前缀：/group1/M00/00/02/rB8YPF0ZyfOAXEgFAAC2p-Q3Nlw565.jpg?signature=554f99503594522e5b36159069da572a&accessKey=OC4wNS4wNS4wNy4wMC4wMy4wMS4wMS4w&timestamp=1234556
 - 域名为人脸服务域名或ip
-- url: /group1/M00/00/02/rB8YPF0ZyfOAXEgFAAC2p-Q3Nlw565.jpg
 - method: get
-- parameters: no
-- OK response: 照片直接显示
-- Fail response:
-```json
-{
-"code": 412,
-"data":{
-  "errorCode": 8000014,
-  "errorMessage": "Request rejection, please vaidate application's credential"
-  },
- "message": "Precondition Failed"
-}
-```
+- parameters: linux生成md5生成势力：md5 -s (security+timestamp)
 
-#  One To N authentication(人脸1:n认证)
-- url: /faceid/public/auth/search
+| signature | accessKey | timestamp |
+|------|----------|------------|
+| 应用security与时间连接 md5 32位 | 应用appid | 时间戳 |
+
+
+#  One To N authentication(人脸1:n认证)- demo 认证api
+- 需要认证（提供给给他人调用） url： /faceid/public/auth/search
+- 无需认证（内部调用） url: /faceid/api/auth/search
+- header: Authorization:Bearer token（前面获取到的token）
 - method: post
 - header: Content-Type: application/json
 - parmeters
-
-| image | feature | appId |
-|------|----------|------------|
-| 图片base64 | 特征值，如果有图片就不用上传特征值 | 应用厂商后端appid |
+```json
+{
+  "appId": "3dff273d-8660-4c53-868d-72c1abcf9097", //认证厂商appid
+  "feature": "", //特征值，如果有图片就不用上传特征值，生物特征值于base64方式传递
+  "file": {
+    "ext": "jpg", // 照片类型
+    "image": "" //用户照片base64
+  }
+}
+```
 
 -  response
 ```json
 {
-  "code": 200,
-  "message": "OK",
-  "data":
-        {
-        "userId": "20021010",
-        "image": "/group1/M00/00/07/rB8YPF0lPJKAEo1aAADziytjPhY542.jpg",
-        "score": 0.1774,
-        "appScore": null,
-        "hasPass": null,
-        "hasPermission": null
-        }
+"code": 200,
+"message": "OK",
+"data":{
+    "userId": "20121008",
+    "image": "/group1/M00/00/02/rBEIsl0tasGARCpKAACe8jcS8B8677.jpg",
+    "score": 0.43955812,
+    "appScore": 0.4,
+    "hasPass": true,
+    "hasPermission": true
+  }
 }
 ```
+```
 
-# 实现人证1:1
-- url：faceid/public/auth/compare/userId
+
+# 实现人证1:1 --- demo 认证接口  
+- 需要认证（提供给给他人调用）url：faceid/public/auth/compare/userId
 - method: post
+- header: Authorization:Bearer token（前面获取到的token）
 - header: Content-Type: application/json
-
 - parmeters:
 
-| appId | userId | featureB | imgB |
-|-------|--------|--------|--------|
-| 应用厂商后端appid | 用户userId | 图片B特征值 | 照片Bbase64 |
+```json
+{
+  "appId": "3dff273d-8660-4c53-868d-72c1abcf9097",  // 认证厂商id
+  "featureB": "", // 认证的照片特征值
+  "imageB": {
+    "ext": "jpg", // 照片类型
+    "image": "" // 照片base64
+  },
+  "userId": "19741062" // 用户工号
+}
+```
 
 - response:
 ```json
 {
 "code": 200,
 "message": "OK",
-"data":
-        {
-        "userId": "20021010",
-        "image": "/group1/M00/00/07/rB8YPF0lPJKAEo1aAADziytjPhY542.jpg",
-        "score": 0.1774,
-        "appScore": null,
-        "hasPass": null,
-        "hasPermission": null
-        }
+"data":{
+    "userId": "20121008",
+    "image": "/group1/M00/00/02/rBEIsl0tasGARCpKAACe8jcS8B8677.jpg",
+    "score": 0.3508,
+    "appScore": 0.4,
+    "hasPass": false,
+    "hasPermission": true
+  }
 }
 ```
 
 #  用户上传照片照片base64
-- url：faceid/public/face/image?token=xxx
+- url：faceid/public/face/image
 - method: post
+- header: Authorization:Bearer token（前面获取到的token）
 - header: Content-Type: application/json
 - parmeters:
 
@@ -161,8 +171,9 @@
 ```
 
 # 分页查询用户特征值
-- url: /faceid/public/face/findUserFace?token=xx
+- url: /faceid/public/face/findUserFace
 - method: post
+- header: Authorization:Bearer token（前面获取到的token）
 - header: header: Content-Type: application/json
 - paramter:
 
@@ -197,15 +208,24 @@
 }
 ```
 
+
 # 获取照片质量
 - url: faceid/public/face/quality
 - method: post
+- header: Authorization:Bearer token（前面获取到的token）
 - header: header: application/json
 - paramter:
 
-| appId | image |
-|-------| ----------- |
-| 应用厂商前端id | 照片质量base64 |
+```json
+{
+  "appId": "string", // 厂商应用id F
+  "feature": "string", // 照片特征值
+  "file": {
+    "ext": "string", //照片类型
+    "image": "string" //照片base64
+  }
+}
+```
 
 ### response
 ```json
@@ -220,11 +240,11 @@
 ```
 
 # 通过用户id及照片类型获取照片
-- url：/faceid/api/face/searchFaceByUserIdAndType
+- url：/faceid/public/face/searchFaceByUserIdAndType
+- header: Authorization:Bearer token（前面获取到的token）
 - method: post
 - header: application/json
 - parameter:
-
 | userId | type |
 |------- |-------|
 | 用户工号或学号 | 照片类型|
