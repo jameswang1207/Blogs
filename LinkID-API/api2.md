@@ -75,9 +75,8 @@
 | 应用security与时间连接 md5 32位 | 应用appid | 时间戳 |
 
 
-#  One To N authentication(人脸1:n认证)- demo 认证api
-- 需要认证（提供给给他人调用） url： /faceid/public/auth/search
-- 无需认证（内部调用） url: /faceid/api/auth/search
+#  One To N authentication(人脸1:n认证)
+- url： /faceid/public/auth/search
 - header: Authorization:Bearer token（前面获取到的token）
 - method: post
 - header: Content-Type: application/json
@@ -111,8 +110,8 @@
 ```
 
 
-# 实现人证1:1 --- demo 认证接口  
-- 需要认证（提供给给他人调用）url：faceid/public/auth/compare/userId
+# 实现人证1:1
+- url：faceid/public/auth/compare/userId
 - method: post
 - header: Authorization:Bearer token（前面获取到的token）
 - header: Content-Type: application/json
