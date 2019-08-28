@@ -106,6 +106,7 @@
 - [linux安装gpu](https://ying-zhang.github.io/setup/2017/setup-tensorflow-gpu-centos7/)
 - [Centos7 上安装 FastDFS](https://www.cnblogs.com/yufeng218/p/8111961.html)
 - [源码分析]（https://github.com/YunaiV/Blog）
+- [tcpdump命令使用详解](https://www.cnblogs.com/howhy/p/6396664.html)
 
 * spring  boot<br/>
 <a href="https://blog.csdn.net/dyc87112/article/details/54866244/">spring boot 动态设置日志</a><br/>
