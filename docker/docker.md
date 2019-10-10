@@ -18,4 +18,6 @@ https://blog.csdn.net/zhw0596/article/details/81394870
  jar -uvf ./rg.jar ./BOOT-INF/application-dev.yml
  # 解压
  jar -xvf ./
+ # java jar启动
+ nohup java -jar  rg-sso-cas-0.0.1-SNAPSHOT.jar > sso.log &
 ```
