@@ -14,4 +14,8 @@ https://blog.csdn.net/zhw0596/article/details/81394870
 ##  linux 
 ```shell
  netstat -tunlp | grep 9001
+ # 压缩
+ jar -uvf ./rg.jar ./BOOT-INF/application-dev.yml
+ # 解压
+ jar -xvf ./
 ```
