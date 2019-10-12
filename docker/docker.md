@@ -20,4 +20,7 @@ https://blog.csdn.net/zhw0596/article/details/81394870
  jar -xvf ./
  # java jar启动
  nohup java -jar  rg-sso-cas-0.0.1-SNAPSHOT.jar > sso.log &
+ # arp 
+ arp -a 查看arp缓冲区的ip与之对应的mac地址
+ # 堡垒机上无法显示图片
 ```
