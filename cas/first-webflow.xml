@@ -1,0 +1,123 @@
+<!-- 首次认证 弹出认证页面-->
+<var name="credential" class="org.apereo.cas.authentication.UsernamePasswordCredential"/>
+
+<!-- 设置path路径，并设置cookies -->
+<on-start>
+    <evaluate expression="initialFlowSetupAction"/>
+</on-start>
+
+<!-- 最后被加载，从请求参数或是header中获取token并生成认证凭证-->
+<action-state id="tokenAuthenticationCheck">
+    <evaluate expression="tokenAuthenticationAction"/> 
+    <transition on="success" to="sendTicketGrantingTicket"/>
+    <transition on="warn" to="warn"/>
+    <transition on="mfa-gauth" to="mfa-gauth"/>
+    <!-- 首次认证返回null-->
+    <transition on= "*"     to="clientAction"/>
+    <on-exit expression="clearWebflowCredentialsAction"/>
+</action-state>
+
+<!-- 检测是否是代理认证-->
+<action-state id="clientAction">
+    <evaluate expression="clientAction"/>
+    <transition on="success" to="checkUserBinding"/>
+    <!--不是代理认证返回error-->
+    <transition on="error" to="initialAuthenticationRequestValidationCheck"/>
+    <transition on="authenticationFailure" to="handleAuthenticationFailure"/>
+    <transition on="stop" to="stopWebflow"/>
+</action-state>
+
+<!--检测认证信息 tgt 等等-->
+<action-state id="initialAuthenticationRequestValidationCheck">
+    <evaluate expression="initialAuthenticationRequestValidationAction"/>
+    <transition on="authenticationFailure" to="handleAuthenticationFailure"/>
+    <transition on="error" to="initializeLoginForm"/>
+    <!-- 首次认证没有tgt-->
+    <transition on="success" to="ticketGrantingTicketCheck"/>
+    <transition on="gateSuccess" to="redirect"/>
+    <transition on="successWithWarnings" to="ticketGrantingTicketCheck"/>
+    <transition on="login" to="doLoginPolicy"/>
+</action-state>
+
+<action-state id="ticketGrantingTicketCheck">
+    <evaluate expression="ticketGrantingTicketCheckAction"/>
+    <!--tgt 不存在，并执行gateway-->
+    <transition on="notExists" to="gatewayRequestCheck"/>
+    <transition on="invalid" to="terminateSession"/>
+    <transition on="valid" to="hasServiceCheck"/>
+</action-state>
+
+<!-- 执Decision,decision中请求参数为空 -->
+<decision-state id="gatewayRequestCheck">
+    <if test="requestParameters.gateway != '' and requestParameters.gateway != null and flowScope.service != null" then="gatewayServicesManagementCheck" else="serviceAuthorizationCheck"/>
+</decision-state>
+
+<!--检测service-->
+<action-state id="serviceAuthorizationCheck">
+    <evaluate expression="serviceAuthorizationCheck"/>
+    <transition to="initializeLoginRules"/>
+</action-state>
+
+<!-- 执行认证规则，获取需要执行认证方式 -->
+<action-state id="initializeLoginRules">
+    <evaluate expression="initializeLoginMethodAction" />
+    <transition on="success" to="doLoginPolicy"/>
+</action-state>
+
+<!-- 检测规则是否执行完成, 设置填写在页面的参数 -->
+<action-state id="doLoginPolicy">
+     <evaluate expression="doLoginPolicyAction" /> 
+     <transition on="success" to="createTicketGrantingTicket"/>
+     <transition on="fillUserInfo" to="casMustChangePassView">
+     <transition on="gateSuccess" to="redirect">
+     <!--跳转到login进行认证-->
+     <transition on="login" to="initializeLoginForm"/>
+     <transition on="skip" to="doLoginPolicy"/>
+</action-state>
+
+<!--判断当前是网关认证还是页面认证-->
+<action-state id="initializeLoginForm">
+    <evaluate expression="initializeLoginAction" />
+    <transition on="success" to="viewLoginForm"/>
+    <transition on="timeout" to="initializeLoginRules"/>
+    <transition on="gatewayLoginView" to="viewGatewayLoginForm" />
+</action-state>
+
+<!-- start 并提交显示认证页面-->
+    <view-state id="viewLoginForm" view="casLoginView" model="commonCredential">
+        <binder>
+            <binding property="username" required="false" />
+            <binding property="password" required="false" />
+            <binding property="type" required="false" />
+        </binder>
+        <transition on="submit" bind="true" validate="true" to="realSubmit" history="invalidate" />
+    </view-state>
+
+    <view-state id="viewGatewayLoginForm" view="casGatewayLoginView" model="commonCredential">
+        <binder>
+            <binding property="username" required="false" />
+            <binding property="password" required="false" />
+            <binding property="type" required="false" />
+        </binder>
+        <transition on="submit" bind="true" validate="true" to="realSubmit" history="invalidate" />
+    </view-state>
+
+    <action-state id="realSubmit">
+        <evaluate expression="authenticationViaFormAction" />
+        <transition on="warn" to="warn" />
+        <transition on="success" to="doLoginPolicy" />
+        <transition on="timeout" to="initializeLoginRules" />
+        <transition on="successWithWarnings" to="showAuthenticationWarningMessages" />
+        <transition on="authenticationFailure" to="handleAuthenticationFailure" />
+        <transition on="error" to="initializeLoginForm" />
+    </action-state>
+    <!-- end 并提交显示认证页面-->
+
+<!--跳转到登录页面-->
+<view-state id="viewLoginForm" view="casLoginView" model="credential">
+    <binder>
+        <binding property="username" required="true"/>
+        <binding property="password" required="true"/>
+    </binder>
+    <transition on="submit" bind="true" validate="true" to="realSubmit" history="invalidate"/>
+</view-state>

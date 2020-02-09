@@ -1,0 +1,135 @@
+<!--微信认证-->
+微信开放平台：
+AppID： wxe029446eb7d98f7a
+AppSecrect:  68bc2de808412a53256ab3d690a0eb18
+对应的域名：id.ruijie.com.cn
+url:https://open.weixin.qq.com/connect/qrconnect?style=white&href=https://id.dlmu.edu.cn/cas/css/weixin-qrcode.css&response_type=code&appid=wxe029446eb7d98f7a&redirect_uri=http://id.ruijie.com.cn/login?client_name=Wechat&scope=snsapi_login&state=TST-2-PkE9JJJbAdcMqgl6ml4JifEAcDb48hY9
+
+企业号：
+AgentId(AgentId):1000005
+开发者Secret(AppSecret):bc-WoMBLjGwTc3QK1nWh3wKXC9PtSpCJ7XR0K3xIMu8
+企业Id(EnterpriseId):wxed542a4340283422
+
+login页面发起的认证请求：
+DelegatedClientNavigationController
+
+海大认证微信公众号对接：
+http://service.test.com/oauth2.0/authorize?response_type=code&client_id=OC4wNS4wNS4wNy4wMC4wMy4wMS4wMS4w&redirect_uri=http://192.168.54.7:8081&unionid=olppj0RDiNDKPMvzXZ8FXv4jDsbg&from=wx05ede79285182539
+
+<var name="credential" class="org.apereo.cas.authentication.UsernamePasswordCredential"/>
+
+<on-start>
+    <evaluate expression="initialFlowSetupAction"/>
+</on-start>
+
+<action-state id="tokenAuthenticationCheck">
+    <evaluate expression="tokenAuthenticationAction"/> 
+    <transition on="success" to="sendTicketGrantingTicket"/>
+    <transition on="warn" to="warn"/>
+    <transition on="mfa-gauth" to="mfa-gauth"/>
+    <!-- 每种认证方式都需要走的action -->
+    <transition on= "*"     to="clientAction"/>
+    <on-exit expression="clearWebflowCredentialsAction"/>
+</action-state>
+
+<action-state id="clientAction">
+    <evaluate expression="clientAction"/>
+    <!-- 通过授权后通过accessToken获取用户openid, 成功够跳转checkUserBinding-->
+    <transition on="success" to="checkUserBinding"/>
+    <transition on="error" to="initialAuthenticationRequestValidationCheck"/>
+    <transition on="authenticationFailure" to="handleAuthenticationFailure"/>
+    <transition on="stop" to="stopWebflow"/>
+</action-state>
+
+<action-state id="checkUserBinding">
+    <!-- 微信绑定页面，没有绑定：调用/linkid/remote/user/wxLogin-->
+    <evaluate expression="checkUserBindingAction">
+    <!-- 走绑定子流程:bind-user start 子流程-->
+    <transition on="binduser" to="bind-user">
+    <transition on="error" to="initialAuthenticationRequestValidationCheck"/>
+    <!--上一次绑定过微信-->
+    <transition on="success" to="doLoginPolicy">
+    <transition on="gateSuccess" to="redirect">
+</action-state>
+
+<!-- bind-user start 子流程-->
+<on-start>
+    <evaluate expression="initialFlowSetupAction" />
+</on-start>
+
+<action-state id="initializeBindForm">
+    <evaluate expression="initializeBindAccountAction" />
+    <transition on="success" to="viewBindingForm" />
+</action-state>
+
+<view-state id="viewBindingForm" view="clientBindingView"
+    model="credential">
+    <binder>
+        <binding property="username" required="true" />
+        <binding property="password" required="true" />
+    </binder>
+    <transition on="submit" bind="true" validate="true"
+        to="realSubmit" history="invalidate" />
+</view-state>
+
+<action-state id="realSubmit">
+    <!-- 验证页面上的图片验证码-->
+    <evaluate expression="validateCaptchaAction" />
+    <!--验证用户名和密码，通过调用MultiIdPasswordAuthenticationHandler去linkid认证用户名与密码是否正确，绑定，并检测用户密码是否符合密码强度-->
+    <evaluate expression="bindClientUserAction" />
+    <transition on="success" to="success" />
+    <transition on="error" to="initializeBindForm" />
+    <!--用户密码不符合密码强度-->
+    <transition on="changePassword" to="changePassword" />
+    <!--验证码错误，再走流程-->
+    <transition on="captchaError" to="viewBindingForm" />
+</action-state>
+
+<end-state id="success" />
+<end-state id="changePassword" />
+<!-- bind-user end 子流程-->
+
+<subflow-state id="bind-user" subflow="bind-user">
+    <!--子流程结束走doLoginPloicy-->
+    <transition on="success" to="doLoginPolicy"/>
+    <transition on="error" to="initialAuthenticationRequestValidationCheck"/>
+</subflow-state>
+
+
+<action-state id="doLoginPolicy">
+     <evaluate expression="doLoginPolicyAction" /> <!-- 检测规则是否执行完成, 设置参数 -->
+     <transition on="success" to="createTicketGrantingTicket"/>
+     <!--上次绑定过微信，检测是否需要强制修改密码，如果需要强制修改密码，弹出强制修改密码页面，强制修改密码页面与完善用户信息是一个页面，跳转由前端控制-->
+     <transition on="fillUserInfo" to="casMustChangePassView">
+     <transition on="gateSuccess" to="redirect">
+     <transition on="login" to="initializeLoginForm"/>
+     <transition on="skip" to="doLoginPolicy"/>
+</action-state>
+
+
+<view-state id="casMustChangePassView" view="casMustChangePassView" model="password">
+    <!--完善用户信息时将用户的objectid放在页面，并将验证码的url放在页面上-->
+    <evaluate expression="InitPasswordChangeAction"/>
+    <binder>
+        <binding property="password" required="true"/>
+        <binding property="confirmedPassword" required="true"/>
+    </binder>
+    <transition on="submit" bind="true" validate="true" to="passwordChangeAction" history="invalidate"/>
+</view-state>
+
+<action-state id="passwordChangeAction">
+    <!-- 判断是否是强制修改密码 -->
+    <evaluate expression="passwordChangeAction"/>
+    <!-- 如果不是从强制修改,直接跳转过来，不需要强制修改密码 -->
+    <transition on="passwordUpdateSuccess" to="createTicketGrantingTicket" />
+    <transition on="error" to="casMustChangePassView" />
+    <!-- 强制修改密码后,跳转到登录页面 -->
+    <transition on="login" to="redirectToLogin" />
+</action-state>
+<end-state id="redirectToLogin" view="login" true>
+
+<!-- 认证成功 -->
+<action-state id="createTicketGrantingTicket">
+    <evaluate expression="createTicketGrantingTicketAction"/>
+    <transition on="success" to="sendTicketGrantingTicket"/>
+</action-state>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<link rel="stylesheet" href="">
+	<script src="https://g.alicdn.com/dingding/dinglogin/0.0.5/ddLogin.js"></script>
+</head>
+<body>
+ <h1 id="login_container"></h1>
+ <h2>18969187598</h2>
+</body>
+<script type="text/javascript" charset="utf-8" async defer>	
+
+/*
+* 解释一下goto参数，参考以下例子：
+*/
+var url = encodeURIComponent('http://service.test.com/login');
+var goto = encodeURIComponent('https://oapi.dingtalk.com/connect/oauth2/sns_authorize?appid=dingoabqirtg3avylom0ed&response_type=code&scope=snsapi_login&state=STATE&redirect_uri='+url)
+
+var obj = DDLogin({
+     id:"login_container",//这里需要你在自己的页面定义一个HTML标签并设置id，例如<div id="login_container"></div>或<span id="login_container"></span>
+     goto: goto, //请参考注释里的方式
+     style: "border:none;background-color:#FFFFFF;",
+     width : "365",
+     height: "400"
+ });
+</script>
+</html>

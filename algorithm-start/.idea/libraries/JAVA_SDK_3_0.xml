@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="JAVA_SDK_3.0">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/Documents/s3-config/JAVA_SDK_3.0.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+    <jarDirectory url="jar://$USER_HOME$/Documents/s3-config/JAVA_SDK_3.0.jar!/" recursive="false" />
+  </library>
+</component>

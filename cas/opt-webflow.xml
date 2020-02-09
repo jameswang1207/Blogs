@@ -1,0 +1,82 @@
+opt认证设计到的相应接口：
+
+phone:
+/linkid/remote/user/otp/binding
+根据用户名密码生成密钥
+/linkid/remote/user/otp/qr/binding
+pc端生成包含用户objectid的二维码，手机端扫码获取用户objectId,输入用户的身份证号，根据用户objectId和身份证号生成密钥
+/api/otpAuthn/authorizeLogin
+用户允许登录,手机端调接口发送otp码给后端，前端轮询，页面登录成功
+/api/otpAuthn/denyLogin
+用户拒绝登录，手机端调用接口发送拒绝消息给后端，前端轮询，页面显示拒绝登录
+
+pc:
+pc端打开认证页面,获取认证业务码，并且save到数据库中，并通过小米push到小米云端
+api/otpAuthn/getSessionCode/{userObjectId}
+pc端通过接口验证用户是否在手机端确认登录
+/api/otpAuthn/checkLogin/{userObjectId}
+pc端验证返回的token是否正确
+/api/otpAuthn/verifyToken
+检测用户说会否绑定密码，没有绑定提示用户进行绑定
+/api/otpAuthn/checkUser
+
+<!-- 页面上传不同的认证方式给sso服务器，通过type区分不同的认证方式 -->
+<var name="credential" class="org.apereo.cas.authentication.UsernamePasswordCredential"/>
+<!--手机短信验证码处理器:RgOneTimeTokenAuthenticationHandler-->
+<on-start>
+    <evaluate expression="initialFlowSetupAction"/>
+</on-start>
+
+<action-state id="realSubmit">
+    <evaluate expression="validateCaptchaAction"/>
+    <!-- 对应的action InitialAuthenticationAction：认证处理器, 该类通过调用父类的doExecute，去执行认证
+     父类通过反射找到对应的认证处理器，
+     短信认证处理器：RgOneTimeTokenAuthenticationHandler
+    -->
+    <evaluate expression="authenticationViaFormAction"/>
+    <transition on="warn" to="warn"/>
+    <!--认证成功-->
+    <transition on="success" to="doLoginPolicy"/>
+    <transition on="captchaError" to="initializeLoginForm"/>
+    <transition on="successWithWarnings" to="showAuthenticationWarningMessages"/>
+    <transition on="authenticationFailure" to="handleAuthenticationFailure"/>
+    <transition on="error" to="initializeLoginForm"/>
+</action-state>
+
+<!-- 检测规则是否执行完成, 设置填写在页面的参数 -->
+<action-state id="doLoginPolicy">
+     <evaluate expression="doLoginPolicyAction" /> <!-- 检测规则是否执行完成, 设置参数 -->
+     <transition on="success" to="createTicketGrantingTicket"/>
+     <!--上次绑定过微信，检测是否需要强制修改密码，如果需要强制修改密码，弹出强制修改密码页面，强制修改密码页面与完善用户信息是一个页面，跳转由前端控制-->
+     <transition on="fillUserInfo" to="casMustChangePassView">
+     <transition on="gateSuccess" to="redirect">
+     <transition on="login" to="initializeLoginForm"/>
+     <transition on="skip" to="doLoginPolicy"/>
+</action-state>
+
+<view-state id="casMustChangePassView" view="casMustChangePassView" model="password">
+    <!--完善用户信息时将用户的objectid放在页面，并将验证码的url放在页面上-->
+    <evaluate expression="InitPasswordChangeAction"/>
+    <binder>
+        <binding property="password" required="true"/>
+        <binding property="confirmedPassword" required="true"/>
+    </binder>
+    <transition on="submit" bind="true" validate="true" to="passwordChangeAction" history="invalidate"/>
+</view-state>
+
+<action-state id="passwordChangeAction">
+    <!-- 判断是否是强制修改密码 -->
+    <evaluate expression="passwordChangeAction"/>
+    <!-- 如果不是从强制修改,直接跳转过来，不需要强制修改密码 -->
+    <transition on="passwordUpdateSuccess" to="createTicketGrantingTicket" />
+    <transition on="error" to="casMustChangePassView" />
+    <!-- 强制修改密码后,跳转到登录页面 -->
+    <transition on="login" to="redirectToLogin" />
+</action-state>
+<end-state id="redirectToLogin" view="login" true>
+
+<!-- 认证成功 -->
+<action-state id="createTicketGrantingTicket">
+    <evaluate expression="createTicketGrantingTicketAction"/>
+    <transition on="success" to="sendTicketGrantingTicket"/>
+</action-state>
