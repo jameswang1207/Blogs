@@ -1,6 +1,6 @@
-# 搭建rocketmq的开发环境
+# Build a debug environment
 
-## 启动 RocketMQ Namesrv
+## Start RocketMQ Namesrv
 
 ```java
 package org.apache.rocketmq.namesrv;
@@ -22,7 +22,7 @@ public class NameServerTest {
 }
 ```
 
-# 启动 RocketMQ Broker
+# Start RocketMQ Broker
 
 ```java
 package org.apache.rocketmq.broker;
