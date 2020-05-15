@@ -69,11 +69,28 @@ private MQFaultStrategy mqFaultStrategy = new MQFaultStrategy();
 
 - Client  start process
   - Set client status is failed
+  
   - Check client group has exist
+  
   - Create or get client: clientid is ip@pid
+  
   - Get ClientFactory
+  
   - Register client
+  
   - Add default topic
+  
   - Start client factory
-  - <!--Start client-->  MQClientInstance.start()
+  
+  - <!--Start client-->
+  
+    MQClientInstance start need sync
+  
+  - 
+  
+  - 
+  
+      
+  
+    
 
