@@ -49,48 +49,67 @@ private MQFaultStrategy mqFaultStrategy = new MQFaultStrategy();
 说明：Set up rocket client and client has status
 
 ```java
-    /**
-     * Service just created,not start
-     */
-    CREATE_JUST,
-    /**
-     * Service Running
-     */
-    RUNNING,
-    /**
-     * Service shutdown
-     */
-    SHUTDOWN_ALREADY,
-    /**
-     * Service Start failure
-     */
-    START_FAILED;
+//Service just created,not start
+CREATE_JUST,
+//Service Running
+RUNNING,
+//Service shutdown
+SHUTDOWN_ALREADY,
+//Service Start failure
+START_FAILED;
 ```
 
 - Client  start process
+
   - Set client status is failed
-  
+
   - Check client group has exist
-  
+
   - Create or get client: clientid is ip@pid
-  
+
   - Get ClientFactory
-  
+
   - Register client
-  
+
   - Add default topic
-  
+
   - Start client factory
-  
+
   - <!--Start client-->
-  
+
     MQClientInstance start need sync
-  
-  - 
-  
-  - 
-  
-      
-  
+
+    1. Get nameserver address
+    2. Start requset and response channel
+    3. Start Scheduled task: update name server, update topic route infor from nameServer
+    4. Test: 192.168.0.101@41499, 192.168.0.101@41499
+
+- Send message
+
+  - defaultMqProducer.send();
+
+  - defaultMQProducerImpl.send(msg);
+
+  - defaultMQProducerImpl.sendDefaultImpl(msg);
+
+    ```java
+    // 1. 获取并跟新路由topic信息
+    TopicPublishInfo topicPublishInfo = this.tryToFindTopicPublishInfo(msg.getTopic());
+    // 2. mQClientFactoryt通过客户端工厂更新topic的route信息
+    this.mQClientFactory.updateTopicRouteInfoFromNameServer(topic);
+    // 3. 更新所有消费者与生产者对应的topic信息
+    MQClientInstance.updateTopicRouteInfoFromNameServer()
+    ```
+
+  - sendResult = this.sendKernelImpl(msg, mq, communicationMode, sendCallback, topicPublishInfo, timeout - costTime);---->仔细看
+
     
+
+  
+
+  
+
+    
+
+  
 
