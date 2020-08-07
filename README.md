@@ -107,7 +107,7 @@
 - [Centos7 上安装 FastDFS](https://www.cnblogs.com/yufeng218/p/8111961.html)
 - [源码分析]（https://github.com/YunaiV/Blog）
 - [tcpdump命令使用详解](https://www.cnblogs.com/howhy/p/6396664.html)
-
+- [数据库数据同步](https://github.com/debezium/debezium)
 * spring  boot<br/>
 <a href="https://blog.csdn.net/dyc87112/article/details/54866244/">spring boot 动态设置日志</a><br/>
 <a href="https://blog.csdn.net/u014696837/article/details/80083508">spring boot resttemplate不能发送</a><br/>
